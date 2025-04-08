@@ -46,12 +46,12 @@ public class Player
         _weoponInven = new Inventory<Weopon>();
         _coinInven = new Inventory<Coin>();
         _currentPlace = new Field();
-        _position = new Vector2(6,4);
+        _position = new Vector2(6,3);
     }
 
     public void Move(ConsoleKey input)
     {
-        Vector2 nextPos = Position;
+        Vector2 nextPos = _position;
         switch (input)
         {
             case ConsoleKey.UpArrow:
@@ -76,7 +76,7 @@ public class Player
 
     public void Print()
     {
-        Console.Write(_currentPlace.Map[_position.y, _position.x]);
+        Console.SetCursorPosition(_position.x, _position.y);
         Console.ForegroundColor = _color;
         Console.WriteLine(_symbol);
         Console.ResetColor();

@@ -18,9 +18,6 @@ public abstract class GameObject : IInteractable
     }
     protected Vector2 _position;
     
-    private Place _inplace = Player.Instance.CurrentPlace;
-    
-    
     public void Print()
     {
         Console.SetCursorPosition(_position.x, _position.y);

@@ -27,6 +27,7 @@ public class GameManager
 
     public void Start()
     {
+        Console.CursorVisible = false;
         _gameOver = false;
         _curScene = new FieldScene();
         Player.GetInstance();
@@ -38,7 +39,7 @@ public class GameManager
             Console.Clear();
             _curScene.Render();
             _curScene.Input();
-            _curScene.Result();
+                                         _curScene.Result();
             _curScene.Update();
         }
     }
