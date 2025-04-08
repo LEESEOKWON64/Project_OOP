@@ -46,7 +46,7 @@ public class Player
         _weoponInven = new Inventory<Weopon>();
         _coinInven = new Inventory<Coin>();
         _currentPlace = GameManager.Instance.Places["field"];
-        _position = new Vector2(6,3);
+        _position = new Vector2(3,2);
     }
 
     public void Move(ConsoleKey input)

@@ -13,6 +13,6 @@ public class CasinoObject : GameObject
     
     public override void Interact()
     {
-        Player.Instance.CurrentPlace = GameManager.Instance.Places["casino"];
+        Util.FieldTriangle("카지노","casino");
     }
 }

@@ -11,6 +11,6 @@ public class LotteryObject : GameObject
     
     public override void Interact()
     {
-        Player.Instance.CurrentPlace = GameManager.Instance.Places["lottery"];
+        Util.FieldTriangle("복권방","lottery");
     }
 }

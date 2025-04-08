@@ -11,6 +11,6 @@ public class SmithyObject : GameObject
 
     public override void Interact()
     {
-        Player.Instance.CurrentPlace = GameManager.Instance.Places["smithy"];
+        Util.FieldTriangle("대장간","smithy");
     }
 }
