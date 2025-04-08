@@ -5,7 +5,8 @@ namespace Project;
 public class Player
 {
     private string _name;
-    private GameObject _obj;
+    private char _symbol;
+    private ConsoleColor _color;
     private Inventory<Weopon> _weoponInven;
     private Inventory<Coin> _coinInven;
     private Place _currentPlace;
@@ -40,11 +41,12 @@ public class Player
     private Player()
     {
         _name = "경이리";
-        _obj.Symbol = 'P';
-        _obj.Color = ConsoleColor.White;
+        _symbol = 'P';
+        _color = ConsoleColor.White;
         _weoponInven = new Inventory<Weopon>();
         _coinInven = new Inventory<Coin>();
-        _currentPlace = new Home();
+        _currentPlace = new Field();
+        _position = new Vector2(6,4);
     }
 
     public void Move(ConsoleKey input)
@@ -75,5 +77,8 @@ public class Player
     public void Print()
     {
         Console.Write(_currentPlace.Map[_position.y, _position.x]);
+        Console.ForegroundColor = _color;
+        Console.WriteLine(_symbol);
+        Console.ResetColor();
     }
 }

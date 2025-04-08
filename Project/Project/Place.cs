@@ -18,6 +18,11 @@ public abstract class Place
         get { return _objs; }
     }
 
+    public Place()
+    {
+        _objs = new List<GameObject>();
+    }
+
 
     public void PrintMap()
     {
