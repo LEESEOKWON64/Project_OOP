@@ -12,7 +12,7 @@ public class ComputerObject : GameObject
     }
     public override void Interact()
     {
-        Computer.Instance.GetIntance();
+        Computer.GetIntance();
         Computer.Instance.Browse();
     }
 }
