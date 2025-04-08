@@ -12,5 +12,6 @@ public class HomeObject : GameObject
     public override void Interact()
     {
         Util.FieldTriangle("집","home");
+        Player.Instance.SetPosition(new Vector2(6,6));
     }
 }

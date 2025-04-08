@@ -49,6 +49,8 @@ public class Player
         _position = new Vector2(3,2);
     }
 
+    
+    
     public void Move(ConsoleKey input)
     {
         Vector2 nextPos = _position;
@@ -67,10 +69,27 @@ public class Player
                 nextPos.x++;
                 break;
         }
-        if (_currentPlace.Map[nextPos.y, nextPos.x] == '#')
+
+        if (_currentPlace.Name == "field")
         {
-            _position = nextPos;
+            if (_currentPlace.Map[nextPos.y, nextPos.x] == '#')
+            {
+                _position = nextPos;
+            }
         }
+        else
+        {
+            if (_currentPlace.Map[nextPos.y, nextPos.x] == ' ')
+            {
+                _position = nextPos;
+            }
+        }
+        
+    }
+
+    public void SetPosition(Vector2 Position)
+    {
+        _position = Position;
     }
     
 

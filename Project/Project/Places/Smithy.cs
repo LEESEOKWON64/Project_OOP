@@ -1,4 +1,6 @@
-﻿namespace Project.Places;
+﻿using Project.SmithyObjects;
+
+namespace Project.Places;
 
 public class Smithy : Place
 {
@@ -17,5 +19,10 @@ public class Smithy : Place
             { '▒', ' ', ' ', ' ', '▒', ' ', ' ', '▒' },
             { '▒', '▒', '▒', '▒', '▒', '▒', ' ', '▒' },
         };
+        _objs = new List<GameObject>();
+        _objs.Add(new FieldObject(new Vector2(6,7)));
+        _objs.Add(new BlackSmithObject(new Vector2(3,2)));
+        _objs.Add(new MerchantObject(new Vector2(3,5)));
+        
     }
 }

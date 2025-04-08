@@ -45,7 +45,7 @@ public class GameManager
         
         Player.GetInstance();
         _gameOver = false;
-        _curScene = new FieldScene();
+        _curScene = new PlaceScene();
     }
     public void Run()
     {

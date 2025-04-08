@@ -1,4 +1,6 @@
-﻿namespace Project.Places;
+﻿using Project.HomeObjects;
+
+namespace Project.Places;
 
 public class Home : Place
 {
@@ -17,5 +19,9 @@ public class Home : Place
             { '▒', ' ', ' ', ' ', ' ', ' ', ' ', '▒' },
             { '▒', '▒', '▒', '▒', '▒', '▒', ' ', '▒' },
         };
+        _objs = new List<GameObject>();
+        _objs.Add(new ComputerObject(new Vector2(6,1)));
+        _objs.Add(new LoverObject(new Vector2(1,1)));
+        _objs.Add(new FieldObject(new Vector2(6,7)));
     }
 }

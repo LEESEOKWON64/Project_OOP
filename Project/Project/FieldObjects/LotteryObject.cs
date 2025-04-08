@@ -12,5 +12,6 @@ public class LotteryObject : GameObject
     public override void Interact()
     {
         Util.FieldTriangle("복권방","lottery");
+        Player.Instance.SetPosition(new Vector2(6,6));
     }
 }

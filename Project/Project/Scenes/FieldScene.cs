@@ -1,6 +1,6 @@
 ﻿namespace Project.Scenes;
 
-public class FieldScene : Scene
+public class PlaceScene : Scene
 {
     public override void Render()
     {

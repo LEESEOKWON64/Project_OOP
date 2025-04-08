@@ -4,20 +4,20 @@ public abstract class GameObject : IInteractable
 {
     
     protected char _symbol;
-    
     public char Symbol
     {
         get { return _symbol; }
         set { _symbol = value; }
     }
+    
     protected ConsoleColor _color;
     public ConsoleColor Color
     {
         get { return _color; }
         set { _color = value; }
     }
+    
     protected Vector2 _position;
-
     public Vector2 Position
     {
         get { return _position; }

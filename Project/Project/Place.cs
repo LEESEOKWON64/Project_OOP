@@ -3,6 +3,11 @@
 public abstract class Place
 {
     protected string _name;
+
+    public string Name
+    {
+        get { return _name; }
+    }
     
     private char[,] _map;
     public char[,] Map

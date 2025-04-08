@@ -14,5 +14,6 @@ public class CasinoObject : GameObject
     public override void Interact()
     {
         Util.FieldTriangle("카지노","casino");
+        Player.Instance.SetPosition(new Vector2(6,6));
     }
 }

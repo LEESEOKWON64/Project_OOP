@@ -12,5 +12,6 @@ public class SmithyObject : GameObject
     public override void Interact()
     {
         Util.FieldTriangle("대장간","smithy");
+        Player.Instance.SetPosition(new Vector2(6,6));
     }
 }
