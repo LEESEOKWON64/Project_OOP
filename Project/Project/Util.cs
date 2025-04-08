@@ -15,6 +15,7 @@ public static class Util
         ConsoleKey newInput = Console.ReadKey().Key;
         while (newInput != ConsoleKey.Enter)
         {
+            
             if ((Console.GetCursorPosition() == (x + 1, y + 1)) &&
                 newInput == ConsoleKey.DownArrow)
             {
@@ -42,6 +43,80 @@ public static class Util
         }
     }
     
+    public static void PrintLine(string context, int delay = 0, ConsoleColor textColor = ConsoleColor.White)
+    {
+        Console.ForegroundColor = textColor;
+        Console.WriteLine(context);
+        Thread.Sleep(delay);
+        Console.ResetColor();
+    }
     
+    public static void Print(string context, int delay = 0, ConsoleColor textColor = ConsoleColor.White)
+    {
+        Console.ForegroundColor = textColor;
+        Console.Write(context);
+        Thread.Sleep(delay);
+        Console.ResetColor();
+    }
+
+    public static void PrintWordLine(string context, ConsoleColor textColor = ConsoleColor.White, int delay = 60)
+    {
+        Console.ForegroundColor = textColor;
+        for(int i = 0; i < context.Length; i++)
+        {
+            Console.Write(context[i]);
+            Thread.Sleep(delay);
+        }
+        Console.WriteLine();
+        Console.ResetColor();
+    }
     
+    public static void PrintWord(string context, ConsoleColor textColor = ConsoleColor.White, int delay = 60)
+    {
+        Console.ForegroundColor = textColor;
+        for(int i = 0; i < context.Length; i++)
+        {
+            Console.Write(context[i]);
+            Thread.Sleep(delay);
+        }
+        Thread.Sleep(60);
+        Console.ResetColor();
+    }
+
+    public static void PrintTriangle(int x = 0, int y = 8, params string[] message)
+    {
+        int left;
+        int right;
+
+        for (int i = 0; i < message.Length; i++)
+        {
+            Console.SetCursorPosition(x + 1, y + i);
+            Console.WriteLine(message[i]);
+        }
+
+        Console.SetCursorPosition(x, y);
+        Console.Write("▶");
+        ConsoleKey newInput = Console.ReadKey().Key;
+        (left, right) = Console.GetCursorPosition();
+        while (newInput != ConsoleKey.Enter)
+        {
+            if (right <= y && (right + message.Length - 1) > y && newInput == ConsoleKey.DownArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x, ++y);
+                Console.Write("▶");
+            }
+            else if (right < y && (right + message.Length - 1) >= y &&
+                     newInput == ConsoleKey.UpArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x, --y);
+                Console.Write("▶");
+            }
+
+            newInput = Console.ReadKey().Key;
+        }
+    }
 }

@@ -7,15 +7,21 @@ public class GameManager
 {
     private bool _gameOver;
     private Scene _curScene;
+    private Scene _titleScene;
+    private int _debt;
+    public int Dept
+    {
+        get { return _debt; }
+        set { _debt = value; }
+    }
+    
     private Dictionary<string,Place> _places;
-
     public Dictionary<string, Place> Places
     {
         get { return _places; }
     }
     
     private static GameManager instance;
-
     public static GameManager Instance
     {
         get { return instance; }
@@ -46,9 +52,16 @@ public class GameManager
         Player.GetInstance();
         _gameOver = false;
         _curScene = new PlaceScene();
+        _titleScene = new TitleScene();
     }
     public void Run()
     {
+        Console.Clear();
+        _titleScene.Render();
+        _titleScene.Input();
+        _titleScene.Result();
+        _titleScene.Update();
+        
         while (!_gameOver)
         {
             Console.Clear();
