@@ -1,6 +1,6 @@
 ﻿namespace Project;
 
-public class Vector2
+public struct Vector2
 {
     public int x;
     public int y;

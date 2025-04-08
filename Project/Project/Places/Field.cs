@@ -22,5 +22,4 @@ public class Field : Place
         _objs.Add(new LotteryObject(new Vector2(11,1)));
         _objs.Add(new SmithyObject(new Vector2(7,6)));
     }
-    
 }
