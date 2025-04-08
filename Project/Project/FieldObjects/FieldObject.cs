@@ -12,6 +12,10 @@ public class FieldObject : GameObject
     public override void Interact()
     {
         Util.FieldTriangle("밖","field");
-        Player.Instance.SetPosition(new Vector2(5,3));
+        if (Player.Instance.NextPlace != Player.Instance.CurrentPlace)
+        {
+            Player.Instance.SetPosition(new Vector2(5,3));
+        }
+        Player.Instance.CurrentPlace = Player.Instance.NextPlace;
     }
 }

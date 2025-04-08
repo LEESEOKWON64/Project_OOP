@@ -15,6 +15,20 @@ public class Player
         get { return _currentPlace; }
         set { _currentPlace = value; }
     }
+
+    private Place _prevPlace;
+    public Place PrevPlace
+    {
+        get { return _prevPlace; }
+        set { _prevPlace = value; }
+    }
+    
+    private Place _nextPlace;
+    public Place NextPlace
+    {
+        get { return _nextPlace; }
+        set { _nextPlace = value; }
+    }
     
     private static Player instance;
     public static Player Instance
@@ -46,10 +60,10 @@ public class Player
         _weoponInven = new Inventory<Weopon>();
         _coinInven = new Inventory<Coin>();
         _currentPlace = GameManager.Instance.Places["field"];
+        _prevPlace = GameManager.Instance.Places["field"];
+        _nextPlace = GameManager.Instance.Places["field"];
         _position = new Vector2(3,2);
     }
-
-    
     
     public void Move(ConsoleKey input)
     {

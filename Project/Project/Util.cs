@@ -37,7 +37,11 @@ public static class Util
 
         if (Console.GetCursorPosition() == (x, y + 1))
         {
-            Player.Instance.CurrentPlace = GameManager.Instance.Places[place];
+            Player.Instance.PrevPlace = Player.Instance.CurrentPlace;
+            Player.Instance.NextPlace = GameManager.Instance.Places[place];
         }
     }
+    
+    
+    
 }
