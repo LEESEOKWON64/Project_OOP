@@ -29,6 +29,14 @@ public class Player
         set { _position = value; }
     }
 
+    public static void GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new Player();
+        }
+    }
+
     private Player()
     {
         _name = "경이리";

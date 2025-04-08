@@ -7,11 +7,11 @@ public class GameManager
     private bool _gameOver;
     private Scene _curScene;
     
-    private static GameManager _instance;
+    private static GameManager instance;
 
     public static GameManager Instance
     {
-        get { return _instance; }
+        get { return instance; }
     }
 
     private GameManager()
@@ -19,9 +19,9 @@ public class GameManager
 
     public static void GetInstance()
     {
-        if (_instance == null)
+        if (instance == null)
         {
-            GameManager._instance = new GameManager();
+            instance = new GameManager();
         }
     }
 
@@ -29,6 +29,7 @@ public class GameManager
     {
         _gameOver = false;
         _curScene = new FieldScene();
+        Player.GetInstance();
     }
     public void Run()
     {
