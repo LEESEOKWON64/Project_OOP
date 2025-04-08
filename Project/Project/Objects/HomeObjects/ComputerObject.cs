@@ -1,4 +1,6 @@
-﻿namespace Project.HomeObjects;
+﻿using Project.Scenes;
+
+namespace Project.HomeObjects;
 
 public class ComputerObject : GameObject
 {
@@ -10,6 +12,7 @@ public class ComputerObject : GameObject
     }
     public override void Interact()
     {
-        
+        Computer.Instance.GetIntance();
+        Computer.Instance.Browse();
     }
 }

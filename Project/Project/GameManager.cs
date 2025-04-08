@@ -9,6 +9,7 @@ public class GameManager
     private Scene _curScene;
     private Scene _titleScene;
     private int _debt;
+    private Intro intro;
     public int Dept
     {
         get { return _debt; }
@@ -53,14 +54,18 @@ public class GameManager
         _gameOver = false;
         _curScene = new PlaceScene();
         _titleScene = new TitleScene();
+
+        intro = new();
     }
     public void Run()
     {
-        Console.Clear();
+        /*Console.Clear();
         _titleScene.Render();
         _titleScene.Input();
         _titleScene.Result();
         _titleScene.Update();
+
+        intro.Print();*/
         
         while (!_gameOver)
         {

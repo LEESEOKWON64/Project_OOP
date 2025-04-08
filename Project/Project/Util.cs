@@ -83,7 +83,7 @@ public static class Util
         Console.ResetColor();
     }
 
-    public static void PrintTriangle(int x = 0, int y = 8, params string[] message)
+    public static void PrintTriangle(int x, int y, params string[] message)
     {
         int left;
         int right;

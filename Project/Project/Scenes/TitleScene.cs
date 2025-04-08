@@ -18,7 +18,7 @@ public class TitleScene : Scene
         Console.WriteLine("");
         Util.PrintWordLine("훈련지원금을 받은 경이리는 유흥으로 도박을 하기 시작했고,");
         Console.WriteLine("");
-        Util.PrintWord("전재산");
+        Util.PrintWord("전재산 ");
         Util.PrintWord("4천만돈",ConsoleColor.Red);
         Util.PrintWordLine("을 잃고");
         Util.PrintWord("3000만 돈",ConsoleColor.Red);

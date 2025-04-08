@@ -59,10 +59,10 @@ public class Player
         _color = ConsoleColor.White;
         _weoponInven = new Inventory<Weopon>();
         _coinInven = new Inventory<Coin>();
-        _currentPlace = GameManager.Instance.Places["field"];
-        _prevPlace = GameManager.Instance.Places["field"];
-        _nextPlace = GameManager.Instance.Places["field"];
-        _position = new Vector2(3,2);
+        _currentPlace = GameManager.Instance.Places["home"];
+        _prevPlace = GameManager.Instance.Places["home"];
+        _nextPlace = GameManager.Instance.Places["home"];
+        _position = new Vector2(4,3);
     }
     
     public void Move(ConsoleKey input)
