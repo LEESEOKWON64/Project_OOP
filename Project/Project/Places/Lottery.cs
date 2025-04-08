@@ -2,11 +2,11 @@
 
 public class Lottery : Place
 {
+    private GameObject _obj;
     public Lottery()
     {
-        this.Symbol = 'L';
-        this.Color = ConsoleColor.DarkRed;
-        this.Map = new char[8, 8]
+        _name = "lottery";
+        Map = new char[8, 8]
         {
             { '▒', '▒', '▒', '▒', '▒', '▒', '▒', '▒' },
             { '▒', ' ', ' ', ' ', ' ', ' ', ' ', '▒' },
@@ -18,10 +18,4 @@ public class Lottery : Place
             { '▒', '▒', '▒', '▒', '▒', '▒', ' ', '▒' },
         };
     }
-    
-    public override void Interact()
-    {
-        //Place.Enter();
-    }
-    
 }

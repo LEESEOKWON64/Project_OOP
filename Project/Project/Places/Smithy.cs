@@ -2,11 +2,11 @@
 
 public class Smithy : Place
 {
+    private GameObject _obj;
     public Smithy()
     {
-        this.Symbol = 'S';
-        this.Color = ConsoleColor.DarkBlue;
-        this.Map = new char[8, 8]
+        _name = "smithy";
+        Map = new char[8, 8]
         {
             { '▒', '▒', '▒', '▒', '▒', '▒', '▒', '▒' },
             { '▒', ' ', ' ', ' ', '▒', ' ', ' ', '▒' },
@@ -17,10 +17,5 @@ public class Smithy : Place
             { '▒', ' ', ' ', ' ', '▒', ' ', ' ', '▒' },
             { '▒', '▒', '▒', '▒', '▒', '▒', ' ', '▒' },
         };
-    }
-    
-    public override void Interact()
-    {
-        
     }
 }

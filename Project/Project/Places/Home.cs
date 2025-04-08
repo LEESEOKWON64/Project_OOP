@@ -2,11 +2,11 @@
 
 public class Home : Place
 {
+    private GameObject _obj;
     public Home()
     {
-        this.Symbol = 'H';
-        this.Color = ConsoleColor.Cyan;
-        this.Map = new char[8, 8]
+        _name = "home";
+        Map = new char[8, 8]
         {
             { '▒', '▒', '▒', '▒', '▒', '▒', '▒', '▒' },
             { '▒', ' ', ' ', ' ', ' ', ' ', ' ', '▒' },
@@ -18,10 +18,4 @@ public class Home : Place
             { '▒', '▒', '▒', '▒', '▒', '▒', ' ', '▒' },
         };
     }
-    
-    public override void Interact()
-    {
-        //Place.Enter();
-    }
-    
 }

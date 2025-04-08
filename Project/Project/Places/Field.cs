@@ -4,9 +4,8 @@ public class Field : Place
 {
     public Field()
     {
-        this.Symbol = 'F';
-        this.Color = ConsoleColor.DarkGreen;
-        this.Map = new char[8, 13]
+        _name = "field";
+        Map = new char[8, 13]
         {
             { ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
             { ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
@@ -17,10 +16,11 @@ public class Field : Place
             { ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ' },
             { ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ' },
         };
+        _objs = new List<GameObject>();
+        _objs.Add(new CasinoObject(new Vector2(4,0)));
+        _objs.Add(new HomeObject(new Vector2(0,4)));
+        _objs.Add(new LotteryObject(new Vector2(13,4)));
+        _objs.Add(new SmithyObject(new Vector2(8,8)));
     }
     
-    public override void Interact()
-    {
-        //Place.Enter();
-    }
 }

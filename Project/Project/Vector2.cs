@@ -2,8 +2,8 @@
 
 public class Vector2
 {
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
     public Vector2(int x, int y)
     {

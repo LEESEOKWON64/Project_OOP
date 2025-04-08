@@ -2,11 +2,11 @@
 
 public class Casino : Place
 {
+   
     public Casino()
     {
-        this.Symbol = 'C';
-        this.Color = ConsoleColor.DarkYellow;
-        this.Map = new char[8, 8]
+        _name = "casino";
+        Map = new char[8, 8]
         {
             { '▒', '▒', '▒', '▒', '▒', '▒', '▒', '▒' },
             { '▒', ' ', ' ', ' ', ' ', ' ', ' ', '▒' },
@@ -17,11 +17,5 @@ public class Casino : Place
             { '▒', ' ', ' ', ' ', ' ', ' ', ' ', '▒' },
             { '▒', '▒', '▒', '▒', '▒', '▒', ' ', '▒' },
         };
-    }
-    
-    
-    public override void Interact()
-    {
-        
     }
 }

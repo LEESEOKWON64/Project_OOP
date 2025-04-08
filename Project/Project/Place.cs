@@ -1,25 +1,33 @@
 ﻿namespace Project;
 
-public abstract class Place : IInteractable
+public abstract class Place
 {
-    private char _symbol;
-    public char Symbol
-    {
-        get { return _symbol; }
-        set { _symbol = value; }
-    }
-    private ConsoleColor _color;
-    public ConsoleColor Color
-    {
-        get { return _color; }
-        set { _color = value; }
-    }
+    protected string _name;
+    
     private char[,] _map;
     public char[,] Map
     {
         get { return _map; }
         set { _map = value; }
     }
+    
+    protected List<GameObject> _objs;
 
-    public abstract void Interact();
+    public List<GameObject> Objs
+    {
+        get { return _objs; }
+    }
+
+
+    public void PrintMap()
+    {
+        for (int i = 0; i < _map.GetLength(0); i++)
+        {
+            for (int j = 0; j < _map.GetLength(1); j++)
+            {
+                Console.Write(_map[i,j]);
+            }
+            Console.WriteLine();
+        }
+    }
 }
