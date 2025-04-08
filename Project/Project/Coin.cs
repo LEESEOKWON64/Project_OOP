@@ -8,6 +8,14 @@ public struct Coin
         get { return _name; }
         set { _name = value; }
     }
+
+    private string _nickName;
+    public string NickName
+    {
+        get { return _nickName; }
+        set { _nickName = value; }
+    }
+    
     public int count { get; set; }
 
     private int _price;
@@ -16,15 +24,22 @@ public struct Coin
     {
         get { return _price; }
     }
-    public int SetPrice()
+
+    public int ChangePrice()
     {
         Random rnd = new Random();
-        if (_price == null)
+        int num = rnd.Next(-50, 50);
+        return num;
+    }
+    public int SetPrice(out int change)
+    {
+        Random rnd = new Random();
+        if (_price < 200)
         {
-            _price = rnd.Next(-50, 50);
+            _price = rnd.Next(500, 1000);
         }
-        int num = rnd.Next(0, 100);
-        _price = (int)((1+num/100) * _price);
+        change = ChangePrice();
+        _price = (int)((1 + change/100) * _price);
         return _price;
     }
 }

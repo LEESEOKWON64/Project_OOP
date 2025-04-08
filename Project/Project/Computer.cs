@@ -2,7 +2,7 @@
 
 public class Computer
 {
-    private Inventory<Coin> _coins;
+    private Coin[] _coins;
     private Stack<string> _menu;
     private char[,] _screen;
     private static Computer instance;
@@ -14,8 +14,11 @@ public class Computer
 
     private Computer()
     {
-        _coins = new Inventory<Coin>();
+        _coins = new Coin[3];
         _menu = new Stack<string>();
+        _coins[0] = (new Coin(){Name = "JTC", NickName = "정택코인", count = 0});
+        _coins[1] = (new Coin(){Name = "CJ", NickName = "캐시재성", count = 0});
+        _coins[2] = (new Coin(){Name = "YVC", NickName = "준헌가상화폐", count = 0});
         
         _screen = new char[16, 50];
         for (int i = 0; i < _screen.GetLength(0); i++)
@@ -90,6 +93,9 @@ public class Computer
                 case "deskTop":
                     DestTopMenu();
                     break;
+                case "coinIntroMenu":
+                    CoinIntroMenu();
+                    break; 
                 case "coinMenu":
                     CoinMenu();
                     break;
@@ -99,7 +105,6 @@ public class Computer
                 case "goingRate":
                     GoingRateMenu();
                     break;
-
             }
         }
     }
@@ -138,19 +143,23 @@ public class Computer
         }
     }
 
-    private void CoinMenu()
+    private void CoinIntroMenu()
     {
         PrintScreen();
         Console.SetCursorPosition(1,11);
-        Util.PrintWordLine("가상화폐 거래소에 오신걸 환영합니다.",ConsoleColor.White,30);
+        Util.PrintWordLine("가상화폐 거래소에 오신걸 환영합니다.",ConsoleColor.White,20);
         Console.SetCursorPosition(1,12);
-        Util.PrintWordLine("환전가는 주기적으로 갱신됩니다.",ConsoleColor.White,30);
+        Util.PrintWordLine("환전가는 주기적으로 갱신됩니다.",ConsoleColor.White,20);
         Console.SetCursorPosition(1,13);
-        Util.PrintWordLine("최소 환전가 200돈 이하가 되면",ConsoleColor.White,30);
+        Util.PrintWordLine("최소 환전가 200돈 이하가 되면",ConsoleColor.White,20);
         Console.SetCursorPosition(1,14);
-        Util.PrintWordLine("상장폐지가 되어 아이템이 전부 폐기됩니다.",ConsoleColor.White,30);
+        Util.PrintWordLine("상장폐지가 되어 아이템이 전부 폐기됩니다.",ConsoleColor.White,20);
         Console.ReadKey(true);
-        Console.Clear();
+        _menu.Push("coinMenu");
+    }
+
+    private void CoinMenu()
+    {
         PrintScreen();
         Util.PrintTriangle(1,11,"코인 거래","시세 확인","프로그램 종료");
 
@@ -165,9 +174,52 @@ public class Computer
         else
         {
             _menu.Pop();
+            _menu.Pop();
         }
     }
-    private void ExchangeMenu(){}
-    private void GoingRateMenu(){}
+
+    private void ExchangeMenu()
+    {
+        
+    }
+
+    private void GoingRateMenu()
+    {
+        PrintScreen();
+        Util.PrintTriangle(1,11,$"{_coins[0].Name}[{_coins[0].NickName}]",
+            $"{_coins[1].Name}[{_coins[1].NickName}]",
+            $"{_coins[2].Name}[{_coins[2].NickName}]");
+        Console.Clear();
+        PrintScreen();
+        if (Console.GetCursorPosition() == (0, 11))
+        {
+            Console.SetCursorPosition(1,11);
+            Util.PrintWordLine($"<{_coins[0].NickName}/{_coins[0].Name}>",ConsoleColor.White,30);
+            Console.SetCursorPosition(1,12);
+            Util.PrintWordLine($"[현재 가격 : {_coins[0].SetPrice(out int change)}돈 = 1{_coins[0].Name}]",ConsoleColor.White,30);
+            Console.SetCursorPosition(1,13);
+            Util.PrintWordLine($"[최근 변동가 : {change}]",ConsoleColor.White,30);
+        }
+        else if(Console.GetCursorPosition() == (0, 12))
+        {
+            Console.SetCursorPosition(1,11);
+            Util.PrintWordLine($"<{_coins[1].NickName}/{_coins[1].Name}>",ConsoleColor.White,30);
+            Console.SetCursorPosition(1,12);
+            Util.PrintWordLine($"[현재 가격 : {_coins[1].SetPrice(out int change)}돈 = 1{_coins[1].Name}]",ConsoleColor.White,30);
+            Console.SetCursorPosition(1,13);
+            Util.PrintWordLine($"[최근 변동가 : {change}]",ConsoleColor.White,30);
+        }
+        else
+        {
+            Console.SetCursorPosition(1,11);
+            Util.PrintWordLine($"<{_coins[2].NickName}/{_coins[2].Name}>",ConsoleColor.White,30);
+            Console.SetCursorPosition(1,12);
+            Util.PrintWordLine($"[현재 가격 : {_coins[2].SetPrice(out int change)}돈 = 1{_coins[2].Name}]",ConsoleColor.White,30);
+            Console.SetCursorPosition(1,13);
+            Util.PrintWordLine($"[최근 변동가 : {change}]",ConsoleColor.White,30);
+        }
+        Console.ReadKey(true);
+        _menu.Pop();
+    }
 
 }

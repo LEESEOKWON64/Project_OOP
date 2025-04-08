@@ -4,30 +4,36 @@ namespace Project;
 
 public class Inventory<T>
 {
-    private List<T> inventory;
+    private List<T> inven;
+
+    public List<T> Inven
+    {
+        get { return inven; }
+        set { inven = value; }
+    }
     
     public Inventory()
     {
-        inventory = new List<T>();
+        inven = new List<T>();
     }
 
     public void Add(T item)
     {
-        inventory.Add(item);
+        inven.Add(item);
     }
 
     public void Remove(T item)
     {
-        inventory.Remove(item);
+        inven.Remove(item);
     }
 
     public void PrintAll()
     {
-        if(inventory.Count == 0) Console.WriteLine("");
+        if(inven.Count == 0) Console.WriteLine("");
         
-        for (int i = 0; i < inventory.Count; i++)
+        for (int i = 0; i < inven.Count; i++)
         {
-            Console.WriteLine($"{i+1}. {inventory[i]}");
+            Console.WriteLine($"{i+1}. {inven[i]}");
         }
     }
 }

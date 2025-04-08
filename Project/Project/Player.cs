@@ -8,7 +8,7 @@ public class Player
     private char _symbol;
     private ConsoleColor _color;
     private Inventory<Weopon> _weoponInven;
-    private Inventory<Coin> _coinInven;
+
     private Place _currentPlace;
     public Place CurrentPlace
     {
@@ -58,7 +58,6 @@ public class Player
         _symbol = 'P';
         _color = ConsoleColor.White;
         _weoponInven = new Inventory<Weopon>();
-        _coinInven = new Inventory<Coin>();
         _currentPlace = GameManager.Instance.Places["home"];
         _prevPlace = GameManager.Instance.Places["home"];
         _nextPlace = GameManager.Instance.Places["home"];
