@@ -11,6 +11,6 @@ public class FieldObject : GameObject
     
     public override void Interact()
     {
-        
+        Player.Instance.CurrentPlace = GameManager.Instance.Places["field"];
     }
 }

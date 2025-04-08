@@ -45,7 +45,7 @@ public class Player
         _color = ConsoleColor.White;
         _weoponInven = new Inventory<Weopon>();
         _coinInven = new Inventory<Coin>();
-        _currentPlace = new Field();
+        _currentPlace = GameManager.Instance.Places["field"];
         _position = new Vector2(6,3);
     }
 

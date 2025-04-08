@@ -17,6 +17,11 @@ public abstract class GameObject : IInteractable
         set { _color = value; }
     }
     protected Vector2 _position;
+
+    public Vector2 Position
+    {
+        get { return _position; }
+    }
     
     public void Print()
     {

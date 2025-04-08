@@ -7,4 +7,5 @@ public abstract class Scene
     public abstract void Input();
     public abstract void Result();
     public abstract void Update();
+    
 }

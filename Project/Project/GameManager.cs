@@ -1,4 +1,5 @@
-﻿using Project.Scenes;
+﻿using Project.Places;
+using Project.Scenes;
 
 namespace Project;
 
@@ -6,6 +7,12 @@ public class GameManager
 {
     private bool _gameOver;
     private Scene _curScene;
+    private Dictionary<string,Place> _places;
+
+    public Dictionary<string, Place> Places
+    {
+        get { return _places; }
+    }
     
     private static GameManager instance;
 
@@ -28,9 +35,17 @@ public class GameManager
     public void Start()
     {
         Console.CursorVisible = false;
+        
+        _places = new Dictionary<string, Place>();
+        _places.Add("casino", new Casino());
+        _places.Add("field", new Field());
+        _places.Add("home", new Home());
+        _places.Add("lottery", new Lottery());
+        _places.Add("smithy", new Smithy());
+        
+        Player.GetInstance();
         _gameOver = false;
         _curScene = new FieldScene();
-        Player.GetInstance();
     }
     public void Run()
     {
@@ -39,7 +54,7 @@ public class GameManager
             Console.Clear();
             _curScene.Render();
             _curScene.Input();
-                                         _curScene.Result();
+            _curScene.Result();
             _curScene.Update();
         }
     }

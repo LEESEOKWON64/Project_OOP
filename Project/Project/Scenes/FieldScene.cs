@@ -20,6 +20,14 @@ public class FieldScene : Scene
     public override void Result()
     {
         Player.Instance.Move(_input);
+        for (int i = 0; i < Player.Instance.CurrentPlace.Objs.Count; i++)
+        {
+            if (Player.Instance.CurrentPlace.Objs[i].Position == Player.Instance.Position)
+            {
+                Player.Instance.CurrentPlace.Objs[i].Interact();
+                break;
+            }
+        }
     }
 
     public override void Update()

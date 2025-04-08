@@ -1,4 +1,6 @@
-﻿namespace Project;
+﻿using Project.Places;
+
+namespace Project;
 
 public class CasinoObject : GameObject
 {
@@ -11,6 +13,6 @@ public class CasinoObject : GameObject
     
     public override void Interact()
     {
-        
+        Player.Instance.CurrentPlace = GameManager.Instance.Places["casino"];
     }
 }
