@@ -50,7 +50,7 @@ public struct Coin
     public int ChangePrice()
     {
         Random rnd = new Random();
-        int num = rnd.Next(-33, 50);
+        int num = rnd.Next(-50, 50);
         return num;
     }
 }

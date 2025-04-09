@@ -101,6 +101,17 @@ public class BlackSmith
     
     private void Enforce()
     {
+        if (Player.Instance.Weopon.Count == 0)
+        {
+            Console.SetCursorPosition(1,11);
+            Util.PrintWordLine("[터저스]");
+            Console.SetCursorPosition(1,12);
+            Util.PrintWordLine("음? 강화할 무기가 없잖나!");
+            Util.PrintWaiting();
+            _script.Pop();
+            _script.Pop();
+            return;
+        }
         Random rate = new Random();
         int Rate = rate.Next(1, 101);
         int index = Array.IndexOf(_weopons, Player.Instance.Weopon[0]);

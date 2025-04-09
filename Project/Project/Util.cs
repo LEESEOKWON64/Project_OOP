@@ -171,7 +171,7 @@ public static class Util
         int left;
         int right;
         (left, right) = Console.GetCursorPosition();
-        Console.SetCursorPosition(left+10, right + 1);
+        Console.SetCursorPosition(25, 15);
         while (!Console.KeyAvailable)
         {
             PrintWord("▼",ConsoleColor.DarkYellow,400);

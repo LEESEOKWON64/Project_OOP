@@ -142,8 +142,8 @@ public class Computer
     private void ExchangeMenu()
     {
         
-        int decision1 = 0;
-        int decision2 = 0;
+        int decision1 = 3;
+        int decision2 = 4;
         GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(38,1);
         Console.Write($"{Player.Instance.Money}돈");
@@ -154,9 +154,9 @@ public class Computer
             Util.PrintTriangle(3, 4, ref decision2, out ConsoleKey newInput,
                                      $"{_coins[0].Name.PadRight(3)}{_coins[0].Price.ToString().PadLeft(10)}", 
                                                    $"{_coins[1].Name.PadRight(3)}{_coins[1].Price.ToString().PadLeft(10)}", 
-                                                   $"{_coins[2].Name.PadRight(3)}{_coins[2].Price.ToString().PadLeft(10)}");
+                                                   $"{_coins[2].Name.PadRight(3)}{_coins[2].Price.ToString().PadLeft(10)}","그만둔다");
             if (newInput == ConsoleKey.Escape) return;
-            
+            if (decision2 == 7) return;
             Console.SetCursorPosition(3,8);
             Util.PrintWordLine("몇 개를 구매하시겠습니까?");
             Console.SetCursorPosition(35,8);
@@ -176,7 +176,7 @@ public class Computer
                 Util.PrintWordLine($"{_coins[1].Name}을 {num}개를 구매하였습니다!");
                 BuyCoin(1, num);
             }
-            else
+            else if (decision2 == 6)
             {
                 Util.PrintCount("buy",_coins[2], out int num);
                 Console.SetCursorPosition(3,12);
@@ -191,8 +191,9 @@ public class Computer
             Util.PrintTriangle(3, 4, ref decision2, out ConsoleKey newInput,
                                                     $"{_coins[0].Name.PadRight(3)}{_coins[0].count.ToString().PadLeft(10)}", 
                                                                   $"{_coins[1].Name.PadRight(3)}{_coins[1].count.ToString().PadLeft(10)}", 
-                                                                  $"{_coins[2].Name.PadRight(3)}{_coins[2].count.ToString().PadLeft(10)}");
+                                                                  $"{_coins[2].Name.PadRight(3)}{_coins[2].count.ToString().PadLeft(10)}","그만둔다");
             if (newInput == ConsoleKey.Escape) return;
+            if (decision2 == 7) return;
             
             Console.SetCursorPosition(3,8);
             Util.PrintWordLine("몇 개를 판매하시겠습니까?");
@@ -213,10 +214,10 @@ public class Computer
                 Util.PrintWordLine($"{_coins[1].Name}을 {num}개를 판매하였습니다!");
                 SellCoin(1, num);
             }
-            else
+            else if (decision2 == 6)
             {
-                Util.PrintCount("sell",_coins[2], out int num);
-                Console.SetCursorPosition(3,12);
+                Util.PrintCount("sell", _coins[2], out int num);
+                Console.SetCursorPosition(3, 12);
                 if (num == 0) return;
                 Util.PrintWordLine($"{_coins[2].Name}을 {num}개를 판매하였습니다!");
                 SellCoin(2, num);
@@ -246,7 +247,7 @@ public class Computer
     
     private void GoingRateMenu()
     {
-        int decision = 0;
+        int decision = 11;
         GameManager.Instance.PrintScreen();
         Util.PrintTriangle(1,11,ref decision,out ConsoleKey newInput, 
             $"{_coins[0].Name}[{_coins[0].NickName}]",
@@ -258,32 +259,55 @@ public class Computer
         GameManager.Instance.PrintScreen();
         if (decision == 11)
         {
+            int price = _coins[0].SetPrice(out int change);
             Console.SetCursorPosition(1,11);
             Util.PrintWordLine($"<{_coins[0].NickName}/{_coins[0].Name}>",ConsoleColor.White,30);
             Console.SetCursorPosition(1,12);
-            Util.PrintWordLine($"[현재 가격 : {_coins[0].SetPrice(out int change)}돈 = 1{_coins[0].Name}]",ConsoleColor.White,30);
+            Util.PrintWordLine($"[현재 가격 : {price}돈 = 1{_coins[0].Name}]",ConsoleColor.White,30);
             Console.SetCursorPosition(1,13);
             Util.PrintWordLine($"[최근 변동가 : {change}]",ConsoleColor.White,30);
+            Util.PrintWaiting();
+            if (price < 200)
+            {
+                Util.PrintWordLine("[해당 코인은 상장 폐지되었습니다]");
+                Util.PrintWordLine("[보유하고 있던 코인이 전부 소멸합니다]");
+                _coins[0].count = 0;
+            }
         }
         else if(decision == 12)
         {
+            int price = _coins[1].SetPrice(out int change);
             Console.SetCursorPosition(1,11);
             Util.PrintWordLine($"<{_coins[1].NickName}/{_coins[1].Name}>",ConsoleColor.White,30);
             Console.SetCursorPosition(1,12);
-            Util.PrintWordLine($"[현재 가격 : {_coins[1].SetPrice(out int change)}돈 = 1{_coins[1].Name}]",ConsoleColor.White,30);
+            Util.PrintWordLine($"[현재 가격 : {price}돈 = 1{_coins[1].Name}]",ConsoleColor.White,30);
             Console.SetCursorPosition(1,13);
             Util.PrintWordLine($"[최근 변동가 : {change}]",ConsoleColor.White,30);
+            Util.PrintWaiting();
+            if (price < 200)
+            {
+                Util.PrintWordLine("[해당 코인은 상장 폐지되었습니다]");
+                Util.PrintWordLine("[보유하고 있던 코인이 전부 소멸합니다]");
+                _coins[1].count = 0;
+            }
         }
         else
         {
+            int price = _coins[2].SetPrice(out int change);
             Console.SetCursorPosition(1,11);
             Util.PrintWordLine($"<{_coins[2].NickName}/{_coins[2].Name}>",ConsoleColor.White,30);
             Console.SetCursorPosition(1,12);
-            Util.PrintWordLine($"[현재 가격 : {_coins[2].SetPrice(out int change)}돈 = 1{_coins[2].Name}]",ConsoleColor.White,30);
+            Util.PrintWordLine($"[현재 가격 : {price}돈 = 1{_coins[2].Name}]",ConsoleColor.White,30);
             Console.SetCursorPosition(1,13);
             Util.PrintWordLine($"[최근 변동가 : {change}]",ConsoleColor.White,30);
+            Util.PrintWaiting();
+            if (price < 200)
+            {
+                Util.PrintWordLine("[해당 코인은 상장 폐지되었습니다]");
+                Util.PrintWordLine("[보유하고 있던 코인이 전부 소멸합니다]");
+                _coins[2].count = 0;
+            }
         }
-        Console.ReadKey(true);
         _menu.Pop();
     }
     
