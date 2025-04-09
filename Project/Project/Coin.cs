@@ -41,7 +41,9 @@ public struct Coin
             _price = rnd.Next(500, 1000);
         }
         change = ChangePrice();
+        int temp = _price;
         _price = (int)((1 + (float)change/100) * _price);
+        change = _price - temp;
         return _price;
     }
     

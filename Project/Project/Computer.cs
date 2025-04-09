@@ -1,4 +1,6 @@
-﻿namespace Project.Scenes;
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace Project.Scenes;
 
 public class Computer
 {
@@ -20,7 +22,6 @@ public class Computer
         _coins[0] = (new Coin(){Name = "JTC", NickName = "정택코인", count = 0});
         _coins[1] = (new Coin(){Name = "CJ", NickName = "캐시재성", count = 0});
         _coins[2] = (new Coin(){Name = "YVC", NickName = "준헌가상화폐", count = 0});
-        _inven = Player.Instance.CoinInven;
 
         for (int i = 0; i < _coins.Length; i++)
         {
@@ -208,22 +209,25 @@ public class Computer
             Console.SetCursorPosition(35,8);
             if (decision2 == 4)
             {
-                Util.PrintCount(_coins[0], out int num);
+                Util.PrintCount("buy",_coins[0], out int num);
                 Console.SetCursorPosition(3,12);
+                if (num == 0) return;
                 Console.WriteLine($"{_coins[0].Name}을 {num}개를 구매하였습니다!");
                 BuyCoin(0, num);
             }
             else if (decision2 == 5)
             {
-                Util.PrintCount(_coins[1], out int num);
+                Util.PrintCount("buy",_coins[1], out int num);
                 Console.SetCursorPosition(3,12);
+                if (num == 0) return;
                 Console.WriteLine($"{_coins[1].Name}을 {num}개를 구매하였습니다!");
                 BuyCoin(1, num);
             }
             else
             {
-                Util.PrintCount(_coins[2], out int num);
+                Util.PrintCount("buy",_coins[2], out int num);
                 Console.SetCursorPosition(3,12);
+                if (num == 0) return;
                 Console.WriteLine($"{_coins[2].Name}을 {num}개를 구매하였습니다!");
                 BuyCoin(2, num);
             }
@@ -231,13 +235,37 @@ public class Computer
         }
         else if(decision1 == 13)
         {
-            Util.PrintTriangle(3, 4, ref decision2,$"{_coins[0].Name.PadRight(3)}{_coins[0].count.ToString().PadLeft(10)}", 
-                $"{_coins[1].Name.PadRight(3)}{_coins[1].count.ToString().PadLeft(10)}", 
-                $"{_coins[2].Name.PadRight(3)}{_coins[2].count.ToString().PadLeft(10)}");
-            if
+            Util.PrintTriangle(3, 4, ref decision2, $"{_coins[0].Name.PadRight(3)}{_coins[0].count.ToString().PadLeft(10)}", 
+                                                                  $"{_coins[1].Name.PadRight(3)}{_coins[1].count.ToString().PadLeft(10)}", 
+                                                                  $"{_coins[2].Name.PadRight(3)}{_coins[2].count.ToString().PadLeft(10)}");
+            Console.SetCursorPosition(3,8);
+            Console.WriteLine("몇 개를 판매하시겠습니까?");
+            Console.SetCursorPosition(35,8);
+            if (decision2 == 4)
             {
-                
+                Util.PrintCount("sell",_coins[0], out int num);
+                Console.SetCursorPosition(3,12);
+                if (num == 0) return;
+                Console.WriteLine($"{_coins[0].Name}을 {num}개를 판매하였습니다!");
+                SellCoin(0, num);
             }
+            else if (decision2 == 5)
+            {
+                Util.PrintCount("sell",_coins[1], out int num);
+                Console.SetCursorPosition(3,12);
+                if (num == 0) return;
+                Console.WriteLine($"{_coins[1].Name}을 {num}개를 판매하였습니다!");
+                SellCoin(1, num);
+            }
+            else
+            {
+                Util.PrintCount("sell",_coins[2], out int num);
+                Console.SetCursorPosition(3,12);
+                if (num == 0) return;
+                Console.WriteLine($"{_coins[2].Name}을 {num}개를 판매하였습니다!");
+                SellCoin(2, num);
+            }
+            Util.PrintWaiting();
         }
         else
         {
@@ -269,7 +297,7 @@ public class Computer
             $"{_coins[2].Name}[{_coins[2].NickName}]");
         Console.Clear();
         PrintScreen();
-        if (Console.GetCursorPosition() == (0, 11))
+        if (decision == 11)
         {
             Console.SetCursorPosition(1,11);
             Util.PrintWordLine($"<{_coins[0].NickName}/{_coins[0].Name}>",ConsoleColor.White,30);
@@ -278,7 +306,7 @@ public class Computer
             Console.SetCursorPosition(1,13);
             Util.PrintWordLine($"[최근 변동가 : {change}]",ConsoleColor.White,30);
         }
-        else if(Console.GetCursorPosition() == (0, 12))
+        else if(decision == 12)
         {
             Console.SetCursorPosition(1,11);
             Util.PrintWordLine($"<{_coins[1].NickName}/{_coins[1].Name}>",ConsoleColor.White,30);
@@ -300,14 +328,4 @@ public class Computer
         _menu.Pop();
     }
     
-    public void AddCoin(Coin item, int quantity)
-    {
-        if(Player.Instance.coinInven.Contains(item)) Player.Instance.coinInven.Add(item);
-        else
-        {
-            int index = Player.Instance.coinInven.IndexOf(item);
-            Player.Instance.coinInven[index].count += quantity;
-        }
-    }
-
 }

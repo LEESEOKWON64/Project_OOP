@@ -180,7 +180,7 @@ public static class Util
         }
     }
 
-    public static void PrintCount(Coin coin, out int num)
+    public static void PrintCount(string type, Coin coin, out int num)
     {
         int left;
         int right;
@@ -188,23 +188,47 @@ public static class Util
         
         ConsoleKey input = ConsoleKey.A;
         num = 0;
-        while (input != ConsoleKey.Enter)
+        if (type == "buy")
         {
-            if (num < 99 && input == ConsoleKey.UpArrow && (num + 1) * coin.Price < Player.Instance.Money) num++;
-            else if (num > 0 && input == ConsoleKey.DownArrow) num--;
-            Console.SetCursorPosition(left,right);
-            Console.Write("\b\b");
-            Console.Write("  ");
-            Console.Write("\b\b\b");
-            Console.Write(num.ToString().PadLeft(3));
+            while (input != ConsoleKey.Enter)
+            {
+                if (num < 99 && input == ConsoleKey.UpArrow && (num + 1) * coin.Price < Player.Instance.Money) num++;
+                else if (num > 0 && input == ConsoleKey.DownArrow) num--;
+                Console.SetCursorPosition(left,right);
+                Console.Write("\b\b");
+                Console.Write("  ");
+                Console.Write("\b\b\b");
+                Console.Write(num.ToString().PadLeft(3));
             
-            Console.SetCursorPosition(left+13,right);
-            Console.Write("\b\b\b\b\b\b");
-            Console.Write("  ");
-            Console.Write("\b\b\b\b\b\b\b");
-            Console.Write($"{(num*coin.Price).ToString().PadLeft(7)}돈");
+                Console.SetCursorPosition(left+13,right);
+                Console.Write("\b\b\b\b\b\b");
+                Console.Write("  ");
+                Console.Write("\b\b\b\b\b\b\b");
+                Console.Write($"{(num*coin.Price).ToString().PadLeft(7)}돈");
             
-            input = Console.ReadKey().Key;
+                input = Console.ReadKey().Key;
+            }
+        }
+        else if (type == "sell")
+        {
+            while (input != ConsoleKey.Enter)
+            {
+                if (num < coin.count && input == ConsoleKey.UpArrow) num++;
+                else if (num > 0 && input == ConsoleKey.DownArrow) num--;
+                Console.SetCursorPosition(left,right);
+                Console.Write("\b\b");
+                Console.Write("  ");
+                Console.Write("\b\b\b");
+                Console.Write(num.ToString().PadLeft(3));
+            
+                Console.SetCursorPosition(left+13,right);
+                Console.Write("\b\b\b\b\b\b");
+                Console.Write("  ");
+                Console.Write("\b\b\b\b\b\b\b");
+                Console.Write($"{(num*coin.Price).ToString().PadLeft(7)}돈");
+            
+                input = Console.ReadKey().Key;
+            }
         }
     }
 }
