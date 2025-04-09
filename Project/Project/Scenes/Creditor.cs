@@ -7,9 +7,10 @@ namespace Project.Scenes;
 public class Creditor
 {
     private int _bank;
-    private int[] _winningNums;
     private Stack<string> _script;
+    private int[] _winningNums;
     private int[] _debtArr;
+    private LotteryTicket _lottery;
 
     private static Creditor instance;
     public static Creditor Instance
@@ -20,12 +21,18 @@ public class Creditor
     private Creditor()
     {
         _bank = 0;
-        _winningNums = new int[6];
         _script = new Stack<string>();
+        _winningNums = new int[6];
         _debtArr = new int[7];
+        _lottery = new LotteryTicket();
         for (int i = 0; i < _debtArr.Length; i++)
         {
             _debtArr[i] = 0;
+        }
+        for (int i = 0; i < _lottery.Numbers.Length; i++)
+        {
+            _winningNums[i] = 0;
+            _lottery.Numbers[i] = 0;
         }
     }
 
@@ -54,7 +61,7 @@ public class Creditor
                 case "lottery":
                     Lottery();
                     break;
-                case "buylottery":
+                case "buyLottery":
                     BuyLottery();
                     break;
                 case "result":
@@ -72,7 +79,7 @@ public class Creditor
 
     private void Main()
     {
-        int decision = 0;
+        int decision = 11;
         GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(1,11);
         Util.PrintWordLine("[유니]");
@@ -109,17 +116,146 @@ public class Creditor
 
     private void Lottery()
     {
-        
+        int decision = 11;
+        GameManager.Instance.PrintScreen();
+        Util.PrintTriangle(1, 11, ref decision, "복원 구매", "당첨 확인", "뒤로 가기");
+        if (decision == 11)
+        {
+            _script.Push("buyLottery");
+        }
+        else if(decision == 12)
+        {
+            _script.Push("result");
+        }
+        else
+        {
+            _script.Pop();
+        }
     }
 
     private void BuyLottery()
     {
+        int decision = 13;
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine("[유니]");
+        Console.SetCursorPosition(1,12);
+        Util.PrintWordLine("복권은 한 번에 하나 밖에 구매할 수 없네");
+        Console.SetCursorPosition(1,13);
+        Util.PrintWordLine("한 장에 30000돈이니 신중하게 결정하게");
+        Util.PrintWaiting();
         
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine("[유니]");
+        Console.SetCursorPosition(1,12);
+        Util.PrintWordLine("어떤 복권을 구매하겠나?");
+        Util.PrintTriangle(1, 13, ref decision, "자동 번호 입력", "수동 번호 입력");
+
+        if (decision == 14)
+        {
+            Console.Clear();
+            GameManager.Instance.PrintScreen();
+            Console.SetCursorPosition(1, 11);
+            Util.PrintWordLine("[복권 번호를 입력해주세요]");
+            Util.PrintSideTriangleForNum(3, 12, ref decision, _lottery.Numbers);
+        }
+        else
+        {
+            _lottery.SetAutoNumbers();
+        }
+        
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine("[복권을 구매하였습니다]");
+        Console.SetCursorPosition(1,12);
+        Util.PrintWordLine("[복권 번호]");
+        Console.SetCursorPosition(1,13);
+        PrintNumbers(_lottery.Numbers);
+        Util.PrintWaiting();
+
+        ResetArr(_lottery.Numbers);
+        _script.Pop();
     }
 
     private void Result()
     {
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine("[유니]");
+        Console.SetCursorPosition(1,12);
+        Util.PrintWordLine("어디 구매한 복권 좀 줘봐");
+        Util.PrintWaiting();
+
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        if (_lottery.Numbers.Contains(0))
+        {
+            Util.PrintWordLine("뭐야 아직 구매를 안했구먼? 허허");
+            _script.Pop();
+            return;
+        }
         
+        int[] winNum = ResetWinningNums();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine("[당첨 번호]");
+        Console.SetCursorPosition(1,12);
+        PrintNumbers(winNum);
+        Console.SetCursorPosition(1,13);
+        Util.PrintWordLine("[구매한 복권 번호]");
+        Console.SetCursorPosition(1,14);
+        PrintNumbers(_lottery.Numbers);
+        Util.PrintWaiting();
+        
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine("[유니]");
+        Console.SetCursorPosition(1,12);
+        Util.PrintWord("어디보자...  ");
+        Util.PrintWord($"{CheckLottery(winNum, _lottery.Numbers)}개를 맞췄구만?");
+        Util.PrintWord("자네 운이 좋구만 여기 돈 받아가게");
+        
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine($"{LotteryResult(CheckLottery(winNum, _lottery.Numbers)) * 30_000}돈을 얻었습니다!");
+        ResetArr(_lottery.Numbers);
+        _script.Pop();
+    }
+    
+    private void Loan()
+    {
+        int decision = 0;
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine("[유니]");
+        Console.SetCursorPosition(1,12);
+        Util.PrintWordLine("여기서 추가 대출을 하겠다고?");
+        Util.PrintWordLine("간이 큰 건지 겁이 없는 건지...");
+        Util.PrintWaiting();
+        
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine($"[현재 남은 빚 : {GameManager.Instance.Dept}");
+        Util.PrintSideTriangleForNum(3, 12, ref decision, _debtArr);
+        
+        int pay = TransPay();
+        Player.Instance.Money += pay;
+        GameManager.Instance.Dept += pay;
+        
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(1,11);
+        Util.PrintWordLine($"{pay}돈을 추가로 빌렸습니다");
+        Console.SetCursorPosition(1,12);
+        Util.PrintWordLine($"남은 빚은 {GameManager.Instance.Dept}돈 입니다");
+        Util.PrintWaiting();
+        ResetArr(_debtArr);
+        _script.Pop();
     }
 
     private void Fulfill()
@@ -132,9 +268,12 @@ public class Creditor
         int pay = TransPay();
         if (pay > Player.Instance.Money)
         {
+            Console.Clear();
+            GameManager.Instance.PrintScreen();
+            Console.SetCursorPosition(1,12);
             Util.PrintWordLine("보유하고 있는 돈보다 많이 입력했습니다");
             Util.PrintWaiting();
-            ResetPay();
+            ResetArr(_debtArr);
             return;
         }
         else
@@ -148,7 +287,7 @@ public class Creditor
             Console.SetCursorPosition(1,12);
             Util.PrintWordLine($"남은 빚은 {GameManager.Instance.Dept}돈 입니다");
             Util.PrintWaiting();
-            ResetPay();
+            ResetArr(_debtArr);
             _script.Pop();
         }
     }
@@ -170,19 +309,16 @@ public class Creditor
         return pay;
     }
 
-    private int[] ResetPay()
+    private int[] ResetArr(int[] arr)
     {
-        for (int i = 0; i < _debtArr.Length; i++)
+        for (int i = 0; i < arr.Length; i++)
         {
-            _debtArr[i] = 0;
+            arr[i] = 0;
         }
 
-        return _debtArr;
+        return arr;
     }
-    private void Loan()
-    {
-        
-    }
+    
     
     private int[] ResetWinningNums()
     {
@@ -190,9 +326,9 @@ public class Creditor
         int num;
         for (int i = 0; i < _winningNums.Length; i++)
         {
-            while (_winningNums.Length == i)
+            while (_winningNums[i] == 0)
             {
-                num = rnd.Next(0, 10);
+                num = rnd.Next(1, 10);
                 if (!_winningNums.Contains(num))
                 {
                     _winningNums[i] = num;
@@ -202,12 +338,12 @@ public class Creditor
         return _winningNums;
     }
 
-    private int CheckLottery(LotteryTicket ticket)
+    private int CheckLottery(int[] left, int[] right)
     {
         int count = 0;
-        for (int i = 0; i < ticket.Numbers.Length; i++)
+        for (int i = 0; i < right.Length; i++)
         {
-            if (_winningNums.Contains(ticket.Numbers[i]))
+            if (left.Contains(right[i]))
             {
                 count++;
             }
@@ -227,6 +363,17 @@ public class Creditor
             _ => 0
         };
         return rate;
+    }
+
+    private void PrintNumbers(int[] lottery)
+    {
+        Util.PrintWord("[  ");
+        for (int i = 0; i < lottery.Length; i++)
+        {
+            Util.PrintWord($"{lottery[i]}");
+            Console.Write("  ");
+        }
+        Util.PrintWordLine("]");
     }
 
     private void ReduceDebt(int amount,int left, int right)

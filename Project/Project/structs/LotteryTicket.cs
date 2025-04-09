@@ -15,7 +15,7 @@ public struct LotteryTicket
         _numbers = new int[6];
     }
 
-    private int[] SetAutoNumbers()
+    public int[] SetAutoNumbers()
     {
         Random rnd = new Random();
         int num;
