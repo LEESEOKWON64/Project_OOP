@@ -237,6 +237,7 @@ public static class Util
         int right;
         decision = x + 1;
         int b = y + 1;
+        ConsoleKey newInput = ConsoleKey.Add;
         
         for (int i = 0; i < number.Length; i++)
         {
@@ -246,7 +247,7 @@ public static class Util
         
         Console.SetCursorPosition(x, y+1);
         Console.Write("▲");
-        ConsoleKey newInput = Console.ReadKey().Key;
+        newInput = Console.ReadKey().Key;
         (left, right) = Console.GetCursorPosition();
         while (newInput != ConsoleKey.Enter)
         {

@@ -105,7 +105,6 @@ public class Creditor
         {
             _script.Push("loan");
         }
-
     }
 
     private void Lottery()
@@ -130,8 +129,11 @@ public class Creditor
         Console.SetCursorPosition(1,11);
         Util.PrintWordLine($"[현재 남은 빚 : {GameManager.Instance.Dept}");
         Util.PrintSideTriangleForNum(3, 12, ref decision, _debtArr);
-        if (TransPay() > Player.Instance.Money)
+        int pay = TransPay();
+        if (pay > Player.Instance.Money)
         {
+            Util.PrintWordLine("보유하고 있는 돈보다 많이 입력했습니다");
+            Util.PrintWaiting();
             ResetPay();
             return;
         }
@@ -139,11 +141,15 @@ public class Creditor
         {
             Console.Clear();
             GameManager.Instance.PrintScreen();
+            Player.Instance.Money -= pay;
+            GameManager.Instance.Dept -= pay;
             Console.SetCursorPosition(1,11);
-            Util.PrintWordLine($"{TransPay()}돈을 갚았습니다");
-            Player.Instance.Money -= TransPay();
-            GameManager.Instance.Dept -= TransPay();
+            Util.PrintWordLine($"{pay}돈을 갚았습니다");
+            Console.SetCursorPosition(1,12);
             Util.PrintWordLine($"남은 빚은 {GameManager.Instance.Dept}돈 입니다");
+            Util.PrintWaiting();
+            ResetPay();
+            _script.Pop();
         }
     }
 
