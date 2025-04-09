@@ -67,14 +67,14 @@ public class GameManager
     }
     public void Run()
     {
-        Console.Clear();
+        /*Console.Clear();
         _titleScene.Render();
         _titleScene.Input();
         _titleScene.Result();
         _titleScene.Update();
 
         Console.Clear();
-        intro.Print();
+        intro.Print();*/
         
         while (!_gameOver)
         {

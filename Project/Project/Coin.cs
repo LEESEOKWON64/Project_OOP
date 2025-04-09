@@ -25,7 +25,14 @@ public struct Coin
         get { return _price; }
     }
 
-    
+    public void SetPrice()
+    {
+        Random rnd = new Random();
+        if (_price < 200)
+        {
+            _price = rnd.Next(500, 1000);
+        }
+    }
     public int SetPrice(out int change)
     {
         Random rnd = new Random();

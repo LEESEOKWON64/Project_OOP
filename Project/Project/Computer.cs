@@ -19,7 +19,11 @@ public class Computer
         _coins[0] = (new Coin(){Name = "JTC", NickName = "정택코인", count = 0});
         _coins[1] = (new Coin(){Name = "CJ", NickName = "캐시재성", count = 0});
         _coins[2] = (new Coin(){Name = "YVC", NickName = "준헌가상화폐", count = 0});
-        
+
+        for (int i = 0; i < _coins.Length; i++)
+        {
+            _coins[i].SetPrice();
+        }
         _screen = new char[16, 50];
         for (int i = 0; i < _screen.GetLength(0); i++)
         {
@@ -111,11 +115,12 @@ public class Computer
 
     private void StartMenu()
     {
+        int decision = 0;
         PrintScreen();
         Console.SetCursorPosition(1,11);
         Util.PrintWordLine("컴퓨터의 전원을 켭니까?",ConsoleColor.White,30
             );
-        Util.PrintTriangle(1,12,"컴퓨터를 켠다","그만둔다");
+        Util.PrintTriangle(1,12, ref decision,"컴퓨터를 켠다","그만둔다");
 
         if (Console.GetCursorPosition() == (0, 12))
         {
@@ -129,8 +134,9 @@ public class Computer
 
     private void DestTopMenu()
     {
+        int decision = 0;
         PrintScreen();
-        Util.PrintTriangle(1,11,"가상화폐 거래","컴퓨터 종료");
+        Util.PrintTriangle(1,11, ref decision, "가상화폐 거래","컴퓨터 종료");
 
         if (Console.GetCursorPosition() == (0, 11))
         {
@@ -160,8 +166,9 @@ public class Computer
 
     private void CoinMenu()
     {
+        int decision = 0;
         PrintScreen();
-        Util.PrintTriangle(1,11,"코인 거래","시세 확인","프로그램 종료");
+        Util.PrintTriangle(1,11,ref decision,"코인 거래","시세 확인","프로그램 종료");
 
         if (Console.GetCursorPosition() == (0, 11))
         {
@@ -181,12 +188,61 @@ public class Computer
     private void ExchangeMenu()
     {
         
+        int decision1 = 0;
+        int decision2 = 0;
+        PrintScreen();
+        Console.SetCursorPosition(38,1);
+        Console.Write($"{Player.Instance.Money}돈");
+        Util.PrintSideTriangle(2, 1, ref decision1,"구입한다", "매각한다", "그만둔다");
+
+        if (decision1 == 3)
+        {
+            Util.PrintTriangle(3, 4, ref decision2,$"{_coins[0].Name.PadRight(3)}{_coins[0].Price.ToString().PadLeft(10)}", 
+                                                   $"{_coins[1].Name.PadRight(3)}{_coins[1].Price.ToString().PadLeft(10)}", 
+                                                   $"{_coins[2].Name.PadRight(3)}{_coins[2].Price.ToString().PadLeft(10)}");
+            if (decision2 == 4)
+            {
+                Console.SetCursorPosition(3,8);
+                Console.WriteLine("몇 개를 구매하시겠습니까?");
+                Console.SetCursorPosition(35,8);
+                Util.PrintCount(_coins[0], out int num);
+                Console.SetCursorPosition(3,12);
+                Console.WriteLine($"{_coins[0].Name}을 {num}개를 구매하였습니다!");
+                BuyCoin(0, num);
+                Util.PrintWaiting();
+            }
+            
+        }
+        else if(decision1 == 13)
+        {
+            
+        }
+        else
+        {
+            _menu.Pop();
+        }
+        
     }
 
+    private void BuyCoin(int index,int quantity)
+    {
+        _coins[index].count += quantity;
+        Player.Instance.Money -= _coins[index].Price * quantity;
+    }
+
+    private void SellCoin(int index, int quantity)
+    {
+        if (_coins[index].count < quantity) return;
+            
+        _coins[index].count -= quantity;
+        Player.Instance.Money += _coins[index].Price * quantity;
+    }
+    
     private void GoingRateMenu()
     {
+        int decision = 0;
         PrintScreen();
-        Util.PrintTriangle(1,11,$"{_coins[0].Name}[{_coins[0].NickName}]",
+        Util.PrintTriangle(1,11,ref decision,$"{_coins[0].Name}[{_coins[0].NickName}]",
             $"{_coins[1].Name}[{_coins[1].NickName}]",
             $"{_coins[2].Name}[{_coins[2].NickName}]");
         Console.Clear();

@@ -8,6 +8,13 @@ public class Player
     private char _symbol;
     private ConsoleColor _color;
     private Inventory<Weopon> _weoponInven;
+    
+    private int _money;
+    public int Money
+    {
+        get { return _money; }
+        set { _money = value; }
+    }
 
     private Place _currentPlace;
     public Place CurrentPlace
@@ -57,6 +64,7 @@ public class Player
         _name = "경이리";
         _symbol = 'P';
         _color = ConsoleColor.White;
+        _money = 150_000;
         _weoponInven = new Inventory<Weopon>();
         _currentPlace = GameManager.Instance.Places["home"];
         _prevPlace = GameManager.Instance.Places["home"];

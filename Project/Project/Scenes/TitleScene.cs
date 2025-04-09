@@ -43,7 +43,8 @@ public class TitleScene : Scene
 
     public override void Input()
     {
-        Util.PrintTriangle(0,7,"쉬움 난이도(빚 200만)","어려움 난이도(빚 1200만)","헬 난이도(빚 3000만)","묵시록 난이도(빚 9999만)");
+        int decision = 0;
+        Util.PrintTriangle(0,7,ref decision,"쉬움 난이도(빚 200만)","어려움 난이도(빚 1200만)","헬 난이도(빚 3000만)","묵시록 난이도(빚 9999만)");
     }
 
     public override void Result()

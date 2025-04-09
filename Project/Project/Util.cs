@@ -86,10 +86,11 @@ public static class Util
         Console.ResetColor();
     }
 
-    public static void PrintTriangle(int x, int y, params string[] message)
+    public static void PrintTriangle(int x, int y, ref int decision, params string[] message)
     {
         int left;
         int right;
+        int a;
 
         for (int i = 0; i < message.Length; i++)
         {
@@ -118,7 +119,7 @@ public static class Util
                 Console.SetCursorPosition(x, --y);
                 Console.Write("▶");
             }
-
+            (a, decision) = Console.GetCursorPosition();
             newInput = Console.ReadKey().Key;
         }
     }
@@ -137,5 +138,73 @@ public static class Util
             Thread.Sleep(400);
         }
         Console.ReadKey(true);
+    }
+    
+    public static void PrintSideTriangle(int x, int y, ref int decision, params string[] message )
+    {
+        int left;
+        int right;
+        int b = 0;
+        
+        for (int i = 0; i < message.Length; i++)
+        {
+            Console.SetCursorPosition(x + 1 + 10*i, y);
+            Console.WriteLine(message[i]);
+        }
+        
+        Console.SetCursorPosition(x, y);
+        Console.Write("▶");
+        ConsoleKey newInput = Console.ReadKey().Key;
+        (left, right) = Console.GetCursorPosition();
+        while (newInput != ConsoleKey.Enter)
+        {
+            if (left - 1 <= x && (left - 1 + (message.Length - 1) * 10) > x 
+                              && newInput == ConsoleKey.RightArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x+=10, y);
+                Console.Write("▶");
+            }
+            else if (left - 1 < x && (left - 1 + (message.Length - 1) * 10) >= x 
+                                  && newInput == ConsoleKey.LeftArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x-=10, y);
+                Console.Write("▶");
+            }
+
+            (decision, b) = Console.GetCursorPosition();
+            newInput = Console.ReadKey().Key;
+        }
+    }
+
+    public static void PrintCount(Coin coin, out int num)
+    {
+        int left;
+        int right;
+        (left,right) = Console.GetCursorPosition();
+        
+        ConsoleKey input = ConsoleKey.A;
+        num = 0;
+        while (input != ConsoleKey.Enter)
+        {
+            if (num < 99 && input == ConsoleKey.UpArrow && (num + 1) * coin.Price < Player.Instance.Money) num++;
+            else if (num > 0 && input == ConsoleKey.DownArrow) num--;
+            Console.SetCursorPosition(left,right);
+            Console.Write("\b\b");
+            Console.Write("  ");
+            Console.Write("\b\b\b");
+            Console.Write(num.ToString().PadLeft(3));
+            
+            Console.SetCursorPosition(left+13,right);
+            Console.Write("\b\b\b\b\b\b");
+            Console.Write("  ");
+            Console.Write("\b\b\b\b\b\b\b");
+            Console.Write($"{(num*coin.Price).ToString().PadLeft(7)}돈");
+            
+            input = Console.ReadKey().Key;
+        }
     }
 }
