@@ -8,8 +8,16 @@ public class GameManager
     private bool _gameOver;
     private Scene _curScene;
     private Scene _titleScene;
-    private int _debt;
     private Intro intro;
+    private DifficultyLevel _level;
+    public DifficultyLevel Level
+    {
+        get { return _level; }
+        set { _level = value; }
+    }
+ 
+    
+    private int _debt;
     public int Dept
     {
         get { return _debt; }

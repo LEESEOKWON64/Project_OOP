@@ -25,12 +25,7 @@ public struct Coin
         get { return _price; }
     }
 
-    public int ChangePrice()
-    {
-        Random rnd = new Random();
-        int num = rnd.Next(-50, 50);
-        return num;
-    }
+    
     public int SetPrice(out int change)
     {
         Random rnd = new Random();
@@ -39,7 +34,14 @@ public struct Coin
             _price = rnd.Next(500, 1000);
         }
         change = ChangePrice();
-        _price = (int)((1 + change/100) * _price);
+        _price = (int)((1 + (float)change/100) * _price);
         return _price;
+    }
+    
+    public int ChangePrice()
+    {
+        Random rnd = new Random();
+        int num = rnd.Next(-33, 50);
+        return num;
     }
 }

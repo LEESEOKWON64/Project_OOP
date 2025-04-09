@@ -1,4 +1,6 @@
-﻿namespace Project;
+﻿using System.Xml.Xsl;
+
+namespace Project;
 
 public static class Util
 {
@@ -68,6 +70,7 @@ public static class Util
             Thread.Sleep(delay);
         }
         Console.WriteLine();
+        Console.WriteLine();
         Console.ResetColor();
     }
     
@@ -118,5 +121,21 @@ public static class Util
 
             newInput = Console.ReadKey().Key;
         }
+    }
+
+    public static void PrintWaiting()
+    {
+        Console.CursorVisible = false;
+        int left;
+        int right;
+        (left, right) = Console.GetCursorPosition();
+        Console.SetCursorPosition(left+10, right + 1);
+        while (!Console.KeyAvailable)
+        {
+            PrintWord("▼",ConsoleColor.DarkYellow,400);
+            Console.Write("\b \b");
+            Thread.Sleep(400);
+        }
+        Console.ReadKey(true);
     }
 }
