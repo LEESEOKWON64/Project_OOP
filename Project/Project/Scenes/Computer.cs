@@ -6,10 +6,8 @@ public class Computer
 {
     private Coin[] _coins;
     private Stack<string> _menu;
-    private char[,] _screen;
-    private static Computer instance;
-    private List<Coin> _inven;
 
+    private static Computer instance;
     public static Computer Instance
     {
         get { return instance; }

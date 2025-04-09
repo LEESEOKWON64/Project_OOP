@@ -231,4 +231,79 @@ public static class Util
             }
         }
     }
+    public static void PrintSideTriangleForNum(int x, int y, ref int decision, params int[] number )
+    {
+        int left;
+        int right;
+        decision = x + 1;
+        int b = y + 1;
+        
+        for (int i = 0; i < number.Length; i++)
+        {
+            Console.SetCursorPosition(x + i, y);
+            Console.WriteLine(number[i]);
+        }
+        
+        Console.SetCursorPosition(x, y+1);
+        Console.Write("▲");
+        ConsoleKey newInput = Console.ReadKey().Key;
+        (left, right) = Console.GetCursorPosition();
+        while (newInput != ConsoleKey.Enter)
+        {
+            if (left - 1 <= x && (left - 1 + number.Length - 1) > x 
+                              && newInput == ConsoleKey.RightArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x+=1, y+1);
+                Console.Write("▲");
+            }
+            else if (left - 1 < x && (left - 1 + number.Length - 1) >= x 
+                                  && newInput == ConsoleKey.LeftArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x-=1, y+1);
+                Console.Write("▲");
+            }
+            else if (newInput == ConsoleKey.UpArrow)
+            {
+                Console.SetCursorPosition(decision,b-1);
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.Write("\b");
+                if (number[decision - left] + 1 < 10)
+                {
+                    Console.Write(number[decision - left] + 1);
+                    number[decision - left] += 1;
+                }
+                else if(number[decision - left] + 1 == 10)
+                {
+                    Console.Write(0);
+                    number[decision - left] = 0;
+                }
+                Console.SetCursorPosition(decision,b);
+            }
+            else if (newInput == ConsoleKey.DownArrow)
+            {
+                Console.SetCursorPosition(decision,b-1);
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.Write("\b");
+                if (number[decision - left] - 1 >= 0)
+                {
+                    Console.Write(number[decision - left] - 1);
+                    number[decision - left] -= 1;
+                }
+                else if(number[decision - left] - 1 < 0)
+                {
+                    Console.Write(9);
+                    number[decision - left] = 9;
+                }
+                Console.SetCursorPosition(decision,b);
+            }
+            (decision, b) = Console.GetCursorPosition();
+            newInput = Console.ReadKey().Key;
+        }
+    }
 }

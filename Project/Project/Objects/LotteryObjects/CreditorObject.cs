@@ -1,4 +1,6 @@
-﻿namespace Project.LotteryObjects;
+﻿using Project.Scenes;
+
+namespace Project.LotteryObjects;
 
 public class CreditorObject : GameObject
 {
@@ -10,6 +12,7 @@ public class CreditorObject : GameObject
     }
     public override void Interact()
     {
-        
+        Creditor.GetInstance();
+        Creditor.Instance.Talk();
     }
 }
