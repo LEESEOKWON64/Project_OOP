@@ -2,11 +2,11 @@
 
 namespace Project;
 
-public class Inventory<T>
+public class Inventory<Coin>
 {
-    private List<T> inven;
+    private List<Coin> inven;
 
-    public List<T> Inven
+    public List<Coin> Inven
     {
         get { return inven; }
         set { inven = value; }
@@ -14,15 +14,11 @@ public class Inventory<T>
     
     public Inventory()
     {
-        inven = new List<T>();
+        inven = new List<Coin>();
     }
 
-    public void Add(T item)
-    {
-        inven.Add(item);
-    }
 
-    public void Remove(T item)
+    public void Remove(Coin item)
     {
         inven.Remove(item);
     }
