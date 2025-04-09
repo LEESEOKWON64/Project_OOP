@@ -1,4 +1,6 @@
-﻿namespace Project.SmithyObjects;
+﻿using Project.Scenes;
+
+namespace Project.SmithyObjects;
 
 public class BlackSmithObject : GameObject
 {
@@ -10,6 +12,7 @@ public class BlackSmithObject : GameObject
     }
     public override void Interact()
     {
-        
+        BlackSmith.GetInstance();
+        BlackSmith.Instance.Talk();
     }
 }

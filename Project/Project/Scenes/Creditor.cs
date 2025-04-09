@@ -88,7 +88,8 @@ public class Creditor
         Util.PrintWaiting();
         Console.Clear();
         GameManager.Instance.PrintScreen();
-        Util.PrintTriangle(1,11, ref decision,"그렇습니다","조,조금만 시간을 더..!","복권을 보러왔다","추가 대출");
+        Util.PrintTriangle(1,11, ref decision, out ConsoleKey newInput,
+            "그렇습니다","조,조금만 시간을 더..!","복권을 보러왔다","추가 대출");
         if (decision == 11)
         {
             _script.Push("fulfill");
@@ -118,7 +119,7 @@ public class Creditor
     {
         int decision = 11;
         GameManager.Instance.PrintScreen();
-        Util.PrintTriangle(1, 11, ref decision, "복원 구매", "당첨 확인", "뒤로 가기");
+        Util.PrintTriangle(1, 11, ref decision, out ConsoleKey newInput, "복원 구매", "당첨 확인", "뒤로 가기");
         if (decision == 11)
         {
             _script.Push("buyLottery");
@@ -151,7 +152,8 @@ public class Creditor
         Util.PrintWordLine("[유니]");
         Console.SetCursorPosition(1,12);
         Util.PrintWordLine("어떤 복권을 구매하겠나?");
-        Util.PrintTriangle(1, 13, ref decision, "자동 번호 입력", "수동 번호 입력");
+        Util.PrintTriangle(1, 13, ref decision, out ConsoleKey newInput,"자동 번호 입력", "수동 번호 입력");
+        if (newInput == ConsoleKey.Escape) return;
 
         if (decision == 14)
         {

@@ -7,7 +7,6 @@ public struct LotteryTicket
     public int[] Numbers
     {
         get { return _numbers; }
-        set { _numbers = value; }
     }
 
     public LotteryTicket()
@@ -30,12 +29,6 @@ public struct LotteryTicket
                 }
             }
         }
-        return _numbers;
-    }
-
-    private int[] SetManualTicket(params int[] input)
-    {
-        _numbers = input;
         return _numbers;
     }
 }

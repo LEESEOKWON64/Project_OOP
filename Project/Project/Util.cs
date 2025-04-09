@@ -86,7 +86,7 @@ public static class Util
         Console.ResetColor();
     }
 
-    public static void PrintTriangle(int x, int y, ref int decision, params string[] message)
+    public static void PrintTriangle(int x, int y, ref int decision, out ConsoleKey newInput ,params string[] message)
     {
         int left;
         int right;
@@ -100,9 +100,9 @@ public static class Util
 
         Console.SetCursorPosition(x, y);
         Console.Write("▶");
-        ConsoleKey newInput = Console.ReadKey().Key;
+        newInput = Console.ReadKey().Key;
         (left, right) = Console.GetCursorPosition();
-        while (newInput != ConsoleKey.Enter)
+        while (newInput != ConsoleKey.Enter && newInput != ConsoleKey.Escape)
         {
             if (right <= y && (right + message.Length - 1) > y && newInput == ConsoleKey.DownArrow)
             {
@@ -123,7 +123,44 @@ public static class Util
             newInput = Console.ReadKey().Key;
         }
     }
+    public static void PrintTriangleList(int x, int y, ref int decision, out ConsoleKey newInput, params List<string> message)
+    {
+        int left;
+        int right;
+        int a;
 
+        for (int i = 0; i < message.Count; i++)
+        {
+            Console.SetCursorPosition(x + 1, y + i);
+            Console.WriteLine(message[i]);
+        }
+
+        Console.SetCursorPosition(x, y);
+        Console.Write("▶");
+        newInput = Console.ReadKey().Key;
+        (left, right) = Console.GetCursorPosition();
+        while (newInput != ConsoleKey.Enter)
+        {
+            if (right <= y && (right + message.Count - 1) > y && newInput == ConsoleKey.DownArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x, ++y);
+                Console.Write("▶");
+            }
+            else if (right < y && (right + message.Count - 1) >= y &&
+                     newInput == ConsoleKey.UpArrow)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.SetCursorPosition(x, --y);
+                Console.Write("▶");
+            }
+            (a, decision) = Console.GetCursorPosition();
+            newInput = Console.ReadKey().Key;
+        }
+    }
+    
     public static void PrintWaiting()
     {
         Console.CursorVisible = false;

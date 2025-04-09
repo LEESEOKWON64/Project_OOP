@@ -1,4 +1,6 @@
-﻿namespace Project.SmithyObjects;
+﻿using Project.Scenes;
+
+namespace Project.SmithyObjects;
 
 public class MerchantObject : GameObject
 {
@@ -10,6 +12,7 @@ public class MerchantObject : GameObject
     }
     public override void Interact()
     {
-        
+        Merchant.GetInstance();
+        Merchant.Instance.Talk();
     }
 }

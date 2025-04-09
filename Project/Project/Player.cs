@@ -7,7 +7,12 @@ public class Player
     private string _name;
     private char _symbol;
     private ConsoleColor _color;
-    private Inventory<Weopon> _weoponInven;
+    private List<Weopon> _weopon;
+    public List<Weopon> Weopon
+    {
+        get => _weopon;
+        set => _weopon = value;
+    }
     
     private int _money;
     public int Money
@@ -65,11 +70,11 @@ public class Player
         _symbol = 'P';
         _color = ConsoleColor.White;
         _money = 150_000;
-        _weoponInven = new Inventory<Weopon>();
-        _currentPlace = GameManager.Instance.Places["lottery"];
-        _prevPlace = GameManager.Instance.Places["lottery"];
-        _nextPlace = GameManager.Instance.Places["lottery"];
-        _position = new Vector2(4,4);
+        _currentPlace = GameManager.Instance.Places["smithy"];
+        _prevPlace = GameManager.Instance.Places["smithy"];
+        _nextPlace = GameManager.Instance.Places["smithy"];
+        _position = new Vector2(3,2);
+        Weopon = new List<Weopon>();
     }
     
     public void Move(ConsoleKey input)
