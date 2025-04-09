@@ -4,8 +4,10 @@ namespace Project;
 
 public static class Util
 {
-    public static void FieldTriangle(string nickname, string place, int x = 0, int y = 8)
+    public static void FieldTriangle(string nickname, string place, int x = 1, int y = 11)
     {
+        int left;
+        int right;
         Console.SetCursorPosition(x, y);
         Console.WriteLine($"{nickname}(으)로 이동하시겠습니까?");
         Console.SetCursorPosition(x + 1, y + 1);
@@ -38,7 +40,9 @@ public static class Util
             newInput = Console.ReadKey().Key;
         }
 
-        if (Console.GetCursorPosition() == (x, y + 1))
+        (left, right) = Console.GetCursorPosition();
+        
+        if (right == y + 1)
         {
             Player.Instance.PrevPlace = Player.Instance.CurrentPlace;
             Player.Instance.NextPlace = GameManager.Instance.Places[place];

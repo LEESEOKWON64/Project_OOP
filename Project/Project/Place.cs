@@ -37,7 +37,7 @@ public abstract class Place
             {
                 Console.Write(_map[i,j]);
             }
-            Console.WriteLine();
+            Console.SetCursorPosition(16,2+i);
         }
     }
 }

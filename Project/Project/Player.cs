@@ -70,10 +70,10 @@ public class Player
         _symbol = 'P';
         _color = ConsoleColor.White;
         _money = 150_000;
-        _currentPlace = GameManager.Instance.Places["smithy"];
-        _prevPlace = GameManager.Instance.Places["smithy"];
-        _nextPlace = GameManager.Instance.Places["smithy"];
-        _position = new Vector2(3,2);
+        _currentPlace = GameManager.Instance.Places["casino"];
+        _prevPlace = GameManager.Instance.Places["casino"];
+        _nextPlace = GameManager.Instance.Places["casino"];
+        _position = new Vector2(32,7);
         Weopon = new List<Weopon>();
     }
     
@@ -98,14 +98,14 @@ public class Player
 
         if (_currentPlace.Name == "field")
         {
-            if (_currentPlace.Map[nextPos.y, nextPos.x] == '#')
+            if (_currentPlace.Map[nextPos.y-1, nextPos.x-16] == '#')
             {
                 _position = nextPos;
             }
         }
         else
         {
-            if (_currentPlace.Map[nextPos.y, nextPos.x] == ' ')
+            if (_currentPlace.Map[nextPos.y-1, nextPos.x-16] == ' ')
             {
                 _position = nextPos;
             }

@@ -5,7 +5,7 @@ public class PlaceScene : Scene
     public override void Render()
     {
         GameManager.Instance.PrintScreen();
-        Console.SetCursorPosition(0,0);
+        Console.SetCursorPosition(16,1);
         Player.Instance.CurrentPlace.PrintMap();
         foreach (var obj in Player.Instance.CurrentPlace.Objs)
         {

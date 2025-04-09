@@ -16,19 +16,19 @@ public class FieldObject : GameObject
         {
             if(Player.Instance.CurrentPlace.Name == "smithy")
             {
-                Player.Instance.SetPosition(new Vector2(7, 5));
+                Player.Instance.SetPosition(new Vector2(24, 7));
             }
             else if(Player.Instance.CurrentPlace.Name == "casino")
             {
-                Player.Instance.SetPosition(new Vector2(3, 2));
+                Player.Instance.SetPosition(new Vector2(21, 3));
             }
             else if (Player.Instance.CurrentPlace.Name == "home")
             {
-                Player.Instance.SetPosition(new Vector2(2, 3));
+                Player.Instance.SetPosition(new Vector2(18, 5));
             }
             else
             {
-                Player.Instance.SetPosition(new Vector2(11, 2));
+                Player.Instance.SetPosition(new Vector2(30, 3));
             }
         }
         Player.Instance.CurrentPlace = Player.Instance.NextPlace;
