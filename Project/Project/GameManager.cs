@@ -8,6 +8,7 @@ public class GameManager
     private bool _gameOver;
     private Scene _curScene;
     private Scene _titleScene;
+    private char[,] _screen;
     private Intro intro;
     private DifficultyLevel _level;
     public DifficultyLevel Level
@@ -46,6 +47,18 @@ public class GameManager
             instance = new GameManager();
         }
     }
+    
+    public void PrintScreen()
+    {
+        for (int i = 0; i < _screen.GetLength(0); i++)
+        {
+            for (int j = 0; j < _screen.GetLength(1); j++)
+            {
+                Console.Write(_screen[i,j]);
+            }
+            Console.WriteLine();
+        }
+    }
 
     public void Start()
     {
@@ -62,6 +75,42 @@ public class GameManager
         _gameOver = false;
         _curScene = new PlaceScene();
         _titleScene = new TitleScene();
+        
+        _screen = new char[16, 50];
+        for (int i = 0; i < _screen.GetLength(0); i++)
+        {
+            for (int j = 0; j < _screen.GetLength(1); j++)
+            {
+                if (i == 0 || i == _screen.GetLength(0) - 1)
+                {
+                    if (i == 0 && j == 0) _screen[i, j] = '┌';
+                    else if(i == 0 && j == _screen.GetLength(1) - 1) _screen[i, j] = '┐';
+                    else if(i == _screen.GetLength(0) - 1 && j == 0) _screen[i, j] = '└';
+                    else if(i == _screen.GetLength(0) - 1 && j == _screen.GetLength(1) - 1) _screen[i, j] = '┘';
+                    else
+                    {
+                        _screen[i, j] = '─';
+                    }
+                }
+                else if (i == 10)
+                {
+                    if (i == 10 && j == 0) _screen[i, j] = '├';
+                    else if(i == 10 && j == _screen.GetLength(1) - 1) _screen[i, j] = '┤';
+                    else
+                    {
+                        _screen[i, j] = '─';
+                    }
+                } 
+                else if (j == 0 || j == _screen.GetLength(1) - 1)
+                {
+                    _screen[i, j] = '│';
+                }
+                else
+                {
+                    _screen[i, j] = ' ';
+                }
+            }
+        }
 
         intro = new();
     }

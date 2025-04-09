@@ -27,53 +27,7 @@ public class Computer
         {
             _coins[i].SetPrice();
         }
-        _screen = new char[16, 50];
-        for (int i = 0; i < _screen.GetLength(0); i++)
-        {
-            for (int j = 0; j < _screen.GetLength(1); j++)
-            {
-                if (i == 0 || i == _screen.GetLength(0) - 1)
-                {
-                    if (i == 0 && j == 0) _screen[i, j] = '┌';
-                    else if(i == 0 && j == _screen.GetLength(1) - 1) _screen[i, j] = '┐';
-                    else if(i == _screen.GetLength(0) - 1 && j == 0) _screen[i, j] = '└';
-                    else if(i == _screen.GetLength(0) - 1 && j == _screen.GetLength(1) - 1) _screen[i, j] = '┘';
-                    else
-                    {
-                        _screen[i, j] = '─';
-                    }
-                }
-                else if (i == 10)
-                {
-                    if (i == 10 && j == 0) _screen[i, j] = '├';
-                    else if(i == 10 && j == _screen.GetLength(1) - 1) _screen[i, j] = '┤';
-                    else
-                    {
-                        _screen[i, j] = '─';
-                    }
-                } 
-                else if (j == 0 || j == _screen.GetLength(1) - 1)
-                {
-                    _screen[i, j] = '│';
-                }
-                else
-                {
-                    _screen[i, j] = ' ';
-                }
-            }
-        }
-    }
-
-    private void PrintScreen()
-    {
-        for (int i = 0; i < _screen.GetLength(0); i++)
-        {
-            for (int j = 0; j < _screen.GetLength(1); j++)
-            {
-                Console.Write(_screen[i,j]);
-            }
-            Console.WriteLine();
-        }
+        
     }
 
     public static void GetIntance()
@@ -119,7 +73,7 @@ public class Computer
     private void StartMenu()
     {
         int decision = 0;
-        PrintScreen();
+        GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(1,11);
         Util.PrintWordLine("컴퓨터의 전원을 켭니까?",ConsoleColor.White,30
             );
@@ -138,7 +92,7 @@ public class Computer
     private void DestTopMenu()
     {
         int decision = 0;
-        PrintScreen();
+        GameManager.Instance.PrintScreen();
         Util.PrintTriangle(1,11, ref decision, "가상화폐 거래","컴퓨터 종료");
 
         if (Console.GetCursorPosition() == (0, 11))
@@ -154,7 +108,7 @@ public class Computer
 
     private void CoinIntroMenu()
     {
-        PrintScreen();
+        GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(1,11);
         Util.PrintWordLine("가상화폐 거래소에 오신걸 환영합니다.",ConsoleColor.White,20);
         Console.SetCursorPosition(1,12);
@@ -170,7 +124,7 @@ public class Computer
     private void CoinMenu()
     {
         int decision = 0;
-        PrintScreen();
+        GameManager.Instance.PrintScreen();
         Util.PrintTriangle(1,11,ref decision,"코인 거래","시세 확인","프로그램 종료");
 
         if (Console.GetCursorPosition() == (0, 11))
@@ -193,7 +147,7 @@ public class Computer
         
         int decision1 = 0;
         int decision2 = 0;
-        PrintScreen();
+        GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(38,1);
         Console.Write($"{Player.Instance.Money}돈");
         Util.PrintSideTriangle(2, 1, ref decision1,"구입한다", "매각한다", "그만둔다");
@@ -291,12 +245,12 @@ public class Computer
     private void GoingRateMenu()
     {
         int decision = 0;
-        PrintScreen();
+        GameManager.Instance.PrintScreen();
         Util.PrintTriangle(1,11,ref decision,$"{_coins[0].Name}[{_coins[0].NickName}]",
             $"{_coins[1].Name}[{_coins[1].NickName}]",
             $"{_coins[2].Name}[{_coins[2].NickName}]");
         Console.Clear();
-        PrintScreen();
+        GameManager.Instance.PrintScreen();
         if (decision == 11)
         {
             Console.SetCursorPosition(1,11);

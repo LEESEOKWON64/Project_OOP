@@ -8,12 +8,6 @@ public class Player
     private char _symbol;
     private ConsoleColor _color;
     private Inventory<Weopon> _weoponInven;
-    private List<Coin> _coinInven;
-    public List<Coin> CoinInven
-    {
-        get { return _coinInven; }
-    }
-    
     
     private int _money;
     public int Money
@@ -72,7 +66,6 @@ public class Player
         _color = ConsoleColor.White;
         _money = 150_000;
         _weoponInven = new Inventory<Weopon>();
-        _coinInven = new List<Coin>();
         _currentPlace = GameManager.Instance.Places["home"];
         _prevPlace = GameManager.Instance.Places["home"];
         _nextPlace = GameManager.Instance.Places["home"];
