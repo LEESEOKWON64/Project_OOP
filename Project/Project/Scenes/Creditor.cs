@@ -176,7 +176,7 @@ public class Creditor
         PrintNumbers(_lottery.Numbers);
         Util.PrintWaiting();
 
-        ResetArr(_lottery.Numbers);
+        Player.Instance.Money -= 30000;
         _script.Pop();
     }
 
@@ -193,7 +193,11 @@ public class Creditor
         GameManager.Instance.PrintScreen();
         if (_lottery.Numbers.Contains(0))
         {
+            Console.SetCursorPosition(1,11);
+            Util.PrintWordLine("[유니]");
+            Console.SetCursorPosition(1,12);
             Util.PrintWordLine("뭐야 아직 구매를 안했구먼? 허허");
+            Util.PrintWaiting();
             _script.Pop();
             return;
         }
@@ -208,20 +212,26 @@ public class Creditor
         Console.SetCursorPosition(1,14);
         PrintNumbers(_lottery.Numbers);
         Util.PrintWaiting();
-        
+
+        int correct = CheckLottery(_lottery.Numbers, winNum);
         Console.Clear();
         GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(1,11);
         Util.PrintWordLine("[유니]");
         Console.SetCursorPosition(1,12);
         Util.PrintWord("어디보자...  ");
-        Util.PrintWord($"{CheckLottery(winNum, _lottery.Numbers)}개를 맞췄구만?");
-        Util.PrintWord("자네 운이 좋구만 여기 돈 받아가게");
+        Util.PrintWordLine($"{correct}개를 맞췄구만?");
+        Console.SetCursorPosition(1,13);
+        Util.PrintWordLine("자네 운이 좋구만 여기 돈 받아가게");
+        Util.PrintWaiting();
         
         Console.Clear();
         GameManager.Instance.PrintScreen();
-        Console.SetCursorPosition(1,11);
-        Util.PrintWordLine($"{LotteryResult(CheckLottery(winNum, _lottery.Numbers)) * 30_000}돈을 얻었습니다!");
+        Console.SetCursorPosition(3,12);
+        Util.PrintWordLine($"[{LotteryResult(correct) * 30_000}돈을 얻었습니다!]");
+        Util.PrintWaiting();
+
+        Player.Instance.Money += (int)(LotteryResult(CheckLottery(winNum, _lottery.Numbers)) * 30_000);
         ResetArr(_lottery.Numbers);
         _script.Pop();
     }
@@ -234,13 +244,14 @@ public class Creditor
         Util.PrintWordLine("[유니]");
         Console.SetCursorPosition(1,12);
         Util.PrintWordLine("여기서 추가 대출을 하겠다고?");
+        Console.SetCursorPosition(1,13);
         Util.PrintWordLine("간이 큰 건지 겁이 없는 건지...");
         Util.PrintWaiting();
         
         Console.Clear();
         GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(1,11);
-        Util.PrintWordLine($"[현재 남은 빚 : {GameManager.Instance.Dept}");
+        Util.PrintWordLine($"[현재 남은 빚 : {GameManager.Instance.Dept}]");
         Util.PrintSideTriangleForNum(3, 12, ref decision, _debtArr);
         
         int pay = TransPay();
@@ -250,9 +261,9 @@ public class Creditor
         Console.Clear();
         GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(1,11);
-        Util.PrintWordLine($"{pay}돈을 추가로 빌렸습니다");
+        Util.PrintWordLine($"[{pay}돈을 추가로 빌렸습니다]");
         Console.SetCursorPosition(1,12);
-        Util.PrintWordLine($"남은 빚은 {GameManager.Instance.Dept}돈 입니다");
+        Util.PrintWordLine($"[남은 빚은 {GameManager.Instance.Dept}돈 입니다]");
         Util.PrintWaiting();
         ResetArr(_debtArr);
         _script.Pop();
@@ -271,7 +282,7 @@ public class Creditor
             Console.Clear();
             GameManager.Instance.PrintScreen();
             Console.SetCursorPosition(1,12);
-            Util.PrintWordLine("보유하고 있는 돈보다 많이 입력했습니다");
+            Util.PrintWordLine("[보유하고 있는 돈보다 많이 입력했습니다]");
             Util.PrintWaiting();
             ResetArr(_debtArr);
             return;
@@ -283,9 +294,9 @@ public class Creditor
             Player.Instance.Money -= pay;
             GameManager.Instance.Dept -= pay;
             Console.SetCursorPosition(1,11);
-            Util.PrintWordLine($"{pay}돈을 갚았습니다");
+            Util.PrintWordLine($"[{pay}돈을 갚았습니다]");
             Console.SetCursorPosition(1,12);
-            Util.PrintWordLine($"남은 빚은 {GameManager.Instance.Dept}돈 입니다");
+            Util.PrintWordLine($"[남은 빚은 {GameManager.Instance.Dept}돈 입니다]");
             Util.PrintWaiting();
             ResetArr(_debtArr);
             _script.Pop();

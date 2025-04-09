@@ -21,9 +21,9 @@ public struct LotteryTicket
         int num;
         for (int i = 0; i < _numbers.Length; i++)
         {
-            while (_numbers.Length == i)
+            while (_numbers[i] == 0)
             {
-                num = rnd.Next(0, 10);
+                num = rnd.Next(1, 10);
                 if (!_numbers.Contains(num))
                 {
                     _numbers[i] = num;
