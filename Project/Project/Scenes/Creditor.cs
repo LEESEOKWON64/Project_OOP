@@ -6,7 +6,6 @@ namespace Project.Scenes;
 
 public class Creditor
 {
-    private int _bank;
     private Stack<string> _script;
     private int[] _winningNums;
     private int[] _debtArr;
@@ -20,7 +19,6 @@ public class Creditor
 
     private Creditor()
     {
-        _bank = 0;
         _script = new Stack<string>();
         _winningNums = new int[6];
         _debtArr = new int[7];
@@ -404,32 +402,5 @@ public class Creditor
             Player.Instance.Money -= amount;
         }
         
-    }
-
-    private void SaveMoney(int amount)
-    {
-        if (_bank + amount < 100_000_000)
-        {
-            _bank += amount;
-            Player.Instance.Money -= amount;
-        }
-        else
-        {
-            Util.PrintWordLine("더 이상 저금할 수 없습니다.");
-        }
-    }
-
-    private void WithdrawMoney(int amount)
-    {
-        if (_bank - amount < 0)
-        {
-            Util.PrintWordLine("저금통의 바닥까지 긁어봤지만");
-            Util.PrintWordLine("그 정도의 돈은 들어있지않았습니다");
-        }
-        else
-        {
-            _bank -= amount;
-            Player.Instance.Money += amount;
-        }
     }
 }

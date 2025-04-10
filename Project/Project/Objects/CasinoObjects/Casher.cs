@@ -1,15 +1,18 @@
-﻿namespace Project.CasinoObjects;
+﻿using Project.Scenes;
 
-public class CasherObject : GameObject
+namespace Project.CasinoObjects;
+
+public class ATMObject : GameObject
 {
-    public CasherObject(Vector2 position)
+    public ATMObject(Vector2 position)
     {
-        _symbol = 'C';
+        _symbol = 'A';
         _color = ConsoleColor.Yellow;
         _position = position;
     } 
     public override void Interact()
     {
-        
+        Atm.GetInstance();
+        Atm.Instance.Talk();
     }
 }

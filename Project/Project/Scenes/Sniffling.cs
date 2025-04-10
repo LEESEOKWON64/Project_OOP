@@ -248,7 +248,6 @@ public class Sniffling
         _script.Pop();
         _script.Pop();
         _script.Pop();
-        
     }
     
     private string Judgement(int num)
