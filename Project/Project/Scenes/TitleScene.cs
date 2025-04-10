@@ -64,7 +64,7 @@ public class TitleScene : Scene
         GameManager.Instance.Dept = GameManager.Instance.Level.debt;
         Util.PrintWord($"[{GameManager.Instance.Level.name} 난이도]",ConsoleColor.DarkYellow);
         Console.WriteLine();
-        Util.PrintWordLine($"15만원부터 시작, 빚 {GameManager.Instance.Level.strDebt}으로 도전합니다.");
+        Util.PrintWordLine($"15만돈부터 시작, 빚 {GameManager.Instance.Level.strDebt}돈으로 도전합니다.");
         
         Thread.Sleep(1000);
         Console.WriteLine();

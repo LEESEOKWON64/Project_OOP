@@ -60,7 +60,7 @@ public class BlackSmith
         Console.SetCursorPosition(1,11);
         Util.PrintWordLine("[터저스]");
         Console.SetCursorPosition(1,12);
-        Util.PrintWordLine("무기를 강화할텐가? 한 번에 1000골드라네");
+        Util.PrintWordLine("무기를 강화할텐가? 한 번에 1000돈이라네");
         Console.SetCursorPosition(1,13);
         Util.PrintWordLine("강화할수록 비싸게 팔 수 있지!");
         Console.SetCursorPosition(1,14);

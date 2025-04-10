@@ -269,7 +269,10 @@ public class Computer
             Util.PrintWaiting();
             if (price < 200)
             {
+                Console.Clear();
+                Console.SetCursorPosition(1,11);
                 Util.PrintWordLine("[해당 코인은 상장 폐지되었습니다]");
+                Console.SetCursorPosition(1,12);
                 Util.PrintWordLine("[보유하고 있던 코인이 전부 소멸합니다]");
                 _coins[0].count = 0;
             }
@@ -286,7 +289,10 @@ public class Computer
             Util.PrintWaiting();
             if (price < 200)
             {
+                Console.Clear();
+                Console.SetCursorPosition(1,11);
                 Util.PrintWordLine("[해당 코인은 상장 폐지되었습니다]");
+                Console.SetCursorPosition(1,12);
                 Util.PrintWordLine("[보유하고 있던 코인이 전부 소멸합니다]");
                 _coins[1].count = 0;
             }
@@ -303,7 +309,10 @@ public class Computer
             Util.PrintWaiting();
             if (price < 200)
             {
+                Console.Clear();
+                Console.SetCursorPosition(1,11);
                 Util.PrintWordLine("[해당 코인은 상장 폐지되었습니다]");
+                Console.SetCursorPosition(1,12);
                 Util.PrintWordLine("[보유하고 있던 코인이 전부 소멸합니다]");
                 _coins[2].count = 0;
             }
