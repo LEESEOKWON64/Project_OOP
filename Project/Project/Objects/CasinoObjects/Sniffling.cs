@@ -1,4 +1,6 @@
-﻿namespace Project.CasinoObjects;
+﻿using Project.Scenes;
+
+namespace Project.CasinoObjects;
 
 public class SnifflingObject : GameObject
 {
@@ -10,6 +12,7 @@ public class SnifflingObject : GameObject
     } 
     public override void Interact()
     {
-        
+        Sniffling.GetInstance();
+        Sniffling.Instance.Talk();
     }
 }
