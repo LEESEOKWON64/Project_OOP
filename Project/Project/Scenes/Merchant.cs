@@ -52,7 +52,6 @@ public class Merchant
         Console.SetCursorPosition(38, 1);
         Console.Write($"{Player.Instance.Money}돈");
         Util.PrintSideTriangle(2, 1, ref decision1, "구입한다", "매각한다", "그만둔다");
-        Console.WriteLine(decision1);
 
         if (decision1 <= 6)
         {
