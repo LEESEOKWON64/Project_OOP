@@ -310,6 +310,7 @@ public class Computer
             if (price < 200)
             {
                 Console.Clear();
+                GameManager.Instance.PrintScreen();
                 Console.SetCursorPosition(1,11);
                 Util.PrintWordLine("[해당 코인은 상장 폐지되었습니다]");
                 Console.SetCursorPosition(1,12);
