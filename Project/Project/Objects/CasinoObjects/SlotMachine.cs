@@ -1,4 +1,6 @@
-﻿namespace Project.CasinoObjects;
+﻿using Project.Scenes;
+
+namespace Project.CasinoObjects;
 
 public class SlotMachineObject : GameObject
 {
@@ -11,6 +13,7 @@ public class SlotMachineObject : GameObject
    
     public override void Interact()
     {
-        
+        SlotMachine.GetInstance();
+        SlotMachine.Instance.Talk();
     }
 }

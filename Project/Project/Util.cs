@@ -348,4 +348,29 @@ public static class Util
             newInput = Console.ReadKey().Key;
         }
     }
+    public static int[] ResetArr(int[] arr)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            arr[i] = 0;
+        }
+        return arr;
+    }
+    
+    public static int Transbet()
+    {
+        int pay = 0;
+        
+        for (int i = 0; i < Player.Instance.bet.Length; i++)
+        {
+            int count = 5-i;
+            while (count!=0)
+            {
+                Player.Instance.bet[i] *= 10;
+                count -= 1;
+            }
+            pay += Player.Instance.bet[i];
+        }
+        return pay;
+    }
 }

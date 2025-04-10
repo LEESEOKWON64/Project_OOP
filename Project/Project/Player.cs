@@ -7,6 +7,7 @@ public class Player
     private string _name;
     private char _symbol;
     private ConsoleColor _color;
+    public int[] bet { get; set; }
     private List<Weopon> _weopon;
     public List<Weopon> Weopon
     {
@@ -70,6 +71,7 @@ public class Player
         _symbol = 'P';
         _color = ConsoleColor.White;
         _money = 150_000;
+        bet = new int[6]{0,0,0,0,0,0};
         _currentPlace = GameManager.Instance.Places["casino"];
         _prevPlace = GameManager.Instance.Places["casino"];
         _nextPlace = GameManager.Instance.Places["casino"];
@@ -125,5 +127,11 @@ public class Player
         Console.ForegroundColor = _color;
         Console.WriteLine(_symbol);
         Console.ResetColor();
+    }
+
+    public int Betting(int amount)
+    {
+        _money -= amount;
+        return amount;
     }
 }

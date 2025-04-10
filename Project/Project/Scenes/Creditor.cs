@@ -234,7 +234,7 @@ public class Creditor
         Util.PrintWaiting();
 
         Player.Instance.Money += (int)(LotteryResult(CheckLottery(winNum, _lottery.Numbers)) * 30_000);
-        ResetArr(_lottery.Numbers);
+        Util.ResetArr(_lottery.Numbers);
         _script.Pop();
     }
     
@@ -267,7 +267,7 @@ public class Creditor
         Console.SetCursorPosition(1,12);
         Util.PrintWordLine($"[남은 빚은 {GameManager.Instance.Dept}돈 입니다]");
         Util.PrintWaiting();
-        ResetArr(_debtArr);
+        Util.ResetArr(_debtArr);
         _script.Pop();
     }
 
@@ -286,7 +286,7 @@ public class Creditor
             Console.SetCursorPosition(1,12);
             Util.PrintWordLine("[보유하고 있는 돈보다 많이 입력했습니다]");
             Util.PrintWaiting();
-            ResetArr(_debtArr);
+            Util.ResetArr(_debtArr);
             return;
         }
         else
@@ -300,7 +300,7 @@ public class Creditor
             Console.SetCursorPosition(1,12);
             Util.PrintWordLine($"[남은 빚은 {GameManager.Instance.Dept}돈 입니다]");
             Util.PrintWaiting();
-            ResetArr(_debtArr);
+            Util.ResetArr(_debtArr);
             _script.Pop();
         }
     }
@@ -320,16 +320,6 @@ public class Creditor
             pay += _debtArr[i];
         }
         return pay;
-    }
-
-    private int[] ResetArr(int[] arr)
-    {
-        for (int i = 0; i < arr.Length; i++)
-        {
-            arr[i] = 0;
-        }
-
-        return arr;
     }
     
     
