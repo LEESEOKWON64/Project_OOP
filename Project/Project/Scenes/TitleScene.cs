@@ -35,7 +35,7 @@ public class TitleScene : Scene
         Util.PrintWordLine("의 빚을 지게 되었다.");
         Util.PrintWaiting();
         Console.Clear();
-        Util.PrintWordLine("그렇게 경이리 수중에 남은 돈, 15만원돈...");
+        Util.PrintWordLine("그렇게 경이리 수중에 남은 돈, 15만 돈...");
         Util.PrintWordLine("이 돈으로 경이리는 기사회생에 나선다!");
         Util.PrintWordLine("도박으로 빚을 갚고 자유의 몸이 되어라!");
         Util.PrintWaiting();

@@ -117,20 +117,18 @@ public class GameManager
                 }
             }
         }
-
-        _debt = 1000000;
         intro = new();
     }
     public void Run()
     {
-        /*Console.Clear();
+        Console.Clear();
         _titleScene.Render();
         _titleScene.Input();
         _titleScene.Result();
         _titleScene.Update();
 
         Console.Clear();
-        intro.Print();*/
+        intro.Print();
         
         while (!_gameOver)
         {

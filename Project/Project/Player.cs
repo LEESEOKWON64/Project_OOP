@@ -73,10 +73,10 @@ public class Player
         _color = ConsoleColor.White;
         _money = 150_000;
         bet = new int[6]{0,0,0,0,0,0};
-        _currentPlace = GameManager.Instance.Places["casino"];
-        _prevPlace = GameManager.Instance.Places["casino"];
-        _nextPlace = GameManager.Instance.Places["casino"];
-        _position = new Vector2(32,7);
+        _currentPlace = GameManager.Instance.Places["home"];
+        _prevPlace = GameManager.Instance.Places["home"];
+        _nextPlace = GameManager.Instance.Places["home"];
+        _position = new Vector2(23,4);
         Weopon = new List<Weopon>();
     }
     public void Action(ConsoleKey input)
@@ -154,6 +154,8 @@ public class Player
         GameManager.Instance.PrintScreen();
         Console.SetCursorPosition(38,1);
         Console.Write($"{Money}돈");
+        Console.SetCursorPosition(30,2);
+        Console.Write($"현재 장소 : {_currentPlace.Name}");
         
         Util.PrintSideTriangle(2, 1, ref decision1,"가방", "포기하기", "그만둔다");
 
