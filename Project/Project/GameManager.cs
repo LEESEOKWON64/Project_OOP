@@ -1,4 +1,5 @@
-﻿using Project.Places;
+﻿using System.Resources;
+using Project.Places;
 using Project.Scenes;
 
 namespace Project;
@@ -6,6 +7,11 @@ namespace Project;
 public class GameManager
 {
     private bool _gameOver;
+    public bool GameOver
+    {
+        get => _gameOver;
+        set => _gameOver = value;
+    }
     private Scene _curScene;
     private Scene _titleScene;
     private char[,] _screen;
@@ -112,6 +118,7 @@ public class GameManager
             }
         }
 
+        _debt = 1000000;
         intro = new();
     }
     public void Run()
@@ -132,9 +139,26 @@ public class GameManager
             _curScene.Input();
             _curScene.Result();
             _curScene.Update();
+            if (_debt <= 0)
+            {
+                Player.Instance.Victory();
+            }
         }
     }
-    
-    public void End(){}
+
+    public void End()
+    {
+        Console.Clear();
+        GameManager.Instance.PrintScreen();
+        Console.SetCursorPosition(2,11);
+        Util.PrintWordLine("여러분!");
+        Console.SetCursorPosition(2,12);
+        Util.PrintWordLine("도박은 정신건강에 정말 해로워요!");
+        Console.SetCursorPosition(2,13);
+        Util.PrintWordLine("플레이어 여러분도 돈을 벌려는 도박보다는");
+        Console.SetCursorPosition(2,14);
+        Util.PrintWordLine("즐기는 도박을 해요!");
+        Util.PrintWaiting();
+    }
     
 }

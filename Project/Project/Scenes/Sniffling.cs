@@ -104,6 +104,10 @@ public class Sniffling
 
             _script.Push("intro");
         }
+        else
+        {
+            _script.Pop();
+        }
     }
 
     private void Intro()

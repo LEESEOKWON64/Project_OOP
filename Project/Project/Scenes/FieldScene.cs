@@ -21,7 +21,7 @@ public class PlaceScene : Scene
 
     public override void Result()
     {
-        Player.Instance.Move(_input);
+        Player.Instance.Action(_input);
         for (int i = 0; i < Player.Instance.CurrentPlace.Objs.Count; i++)
         {
             if (Player.Instance.CurrentPlace.Objs[i].Position == Player.Instance.Position)

@@ -4,7 +4,7 @@ namespace Project.Scenes;
 
 public class Computer
 {
-    private Coin[] _coins;
+    public Coin[] _coins { get; private set; }
     private Stack<string> _menu;
 
     private static Computer instance;
