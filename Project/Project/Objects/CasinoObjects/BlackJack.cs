@@ -1,4 +1,6 @@
-﻿namespace Project.CasinoObjects;
+﻿using Project.Scenes;
+
+namespace Project.CasinoObjects;
 
 public class BlackJackObject : GameObject
 {
@@ -11,6 +13,7 @@ public class BlackJackObject : GameObject
     
     public override void Interact()
     {
-        
+        Blackjack.GetInstance();
+        Blackjack.Instance.Talk();
     }
 }
